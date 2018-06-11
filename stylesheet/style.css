@@ -1,0 +1,478 @@
+/* 
+
+STYLESHEET FOR PRACTICE
+
+
+*/
+
+/* FONTS*/
+
+@font-face{
+
+	font-family: e_commerce;
+	src:url(../fonts/e_commerce/E-commerce.ttf);
+}
+
+
+@font-face{
+
+	font-family: peaxdrawnicons;
+	src:url(../fonts/peaxdrawnicons/PeaxDrawnIcons.ttf);
+}
+
+
+
+@font-face{
+
+	font-family: Source_San_Pro;
+	src:url(../fonts/Source_Sans_Pro/SourceSansPro_Regular.ttf);
+}
+
+@font-face{
+
+	font-family: Sketch_Icons;
+	src:url(../fonts/sketch_icons/SketchIconsbold.ttf);
+}
+
+@font-face{
+
+	font-family: Letters_for_learners;
+	src:url(../fonts/letters_for_learners/Letters_for_Learners.ttf);
+}
+
+/*FONTS CLASS*/
+
+
+.source-san-pro {
+
+	font-family: Source_San_Pro;
+
+}
+
+
+/*-----*/
+
+/*-------------------*/
+
+body {
+
+	margin: 0px;
+	padding: 0px;
+	margin: 0px;
+
+
+}
+
+*{
+
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+}
+
+
+
+
+/* RESPONSIVE STYLE */
+@media screen and (max-width:800px){
+.header-logo,.header-content,.main-sidebar,.main-content,.footer-sidebar, .footer-content {
+	width:100%;
+}
+
+
+
+
+
+.logo-image {
+	background-image: url("../images/logo_1_responsive.png") !important;
+}
+
+
+
+}
+/* --------------*/
+
+
+
+.logo-image {
+	height: 110px;
+	background-image: url("../images/logo_1.png");
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+
+/*
+.navigation-bar {
+	width: 100%;
+	background-color:  white ;;
+	overflow: hidden;
+}
+
+.navigation-bar ul {
+	list-style-type: none;
+	padding: 20px 0px;
+}
+
+.navigation-bar li {
+	float: left;
+}
+
+.navigation-bar a {
+	text-decoration: none;
+	text-align: center;
+	display: block;
+	padding: 14px 15px;
+	outline: none;
+	transition: all .1s ease-in-out;
+}
+
+.navigation-bar a:hover {
+	transform: scale(1.1);
+}
+
+.navigation-bar-icon-name-container{
+	display: inline-block;
+}
+
+.navigation-bar-icon {
+	font-family: Sketch_Icons;
+	font-size: 50px;
+	line-height: 34px;
+	display: block;
+	color: black;
+}
+
+.navigation-bar-text{
+	font-family: Source_San_Pro;
+	color: black ;
+	font-size: 16px;
+}
+
+*/
+
+
+
+label {
+	padding: 12px 20px;
+	vertical-align: middle;
+	font-family: Letters_for_learners;
+	font-size: 25px;
+}
+
+
+
+i {
+	font-family: peaxdrawnicons;
+	font-style: normal;
+	font-size: 40px;
+}
+
+input[type=text] {
+	display: inline-block;
+    padding: 12px 20px;
+    border-radius: .5rem;
+    border: 1px solid #ddd;
+    font-family: Letters_for_learners;
+    font-size: 20px;
+    width: 80%;
+    transition: all .1s ease-in-out;
+    background-image: url("../images/money.png");
+	background-position: right;
+	background-repeat: no-repeat;
+	background-size: 40px;
+}
+
+/*input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+    margin: 0; 
+
+}
+
+*/
+
+
+input:hover {
+	outline: none;
+	border-color: #666;
+	transform: scale(1.1);
+}
+
+input:focus {
+	outline: none;
+	border-color: #666;
+	transform: scale(1.1);
+	
+}
+
+
+
+
+textarea{
+	font-family: Letters_for_learners!important;
+	font-size: 20px !important;
+	border-radius: .5rem;
+    border: 1px solid #ddd;
+    resize: none !important;
+ 	padding: 12px 20px;
+ 	width: 80%;
+ 	transition: all .1s ease-in-out;
+ 	background-image: url("../images/description.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 40px;
+}
+
+textarea:hover {
+	outline: none;
+	border-color: #666;
+	transform: scale(1.1);
+}
+
+textarea:focus {
+	outline: none !important;
+	border-color: #666 !important;
+	transform: scale(1.1);
+}
+
+
+
+textarea::-moz-placeholder { /* Firefox 19+ */
+ 	text-align: middle;
+ 	color: red;
+}
+
+textarea::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: red;
+}
+
+textarea:-ms-input-placeholder { /* IE 10+ */
+  color: pink;
+}
+
+textarea:-moz-placeholder { /* Firefox 18- */
+  color: pink;
+}
+
+textarea:focus {
+	outline: none;
+	border-color: #666;
+}
+/*
+.form-class input[type=text]:focus {
+	background-color: lightblue;
+}*/
+
+
+input[type=radio] {
+display: none;
+}
+
+input#food[type=radio] + label
+{
+background-image: url("../images/food.png");
+background-position: center;
+background-repeat: no-repeat;
+background-size: 40px;
+height: 50px;
+width: 50px;
+display:inline-block;
+padding: 0 0 0 0px;
+margin-right:10px;
+transition: all .1s ease-in-out;
+cursor: pointer;
+opacity: .5;
+-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+input#food[type=radio]:checked + label
+{
+opacity: 1;
+}
+
+input#food[type=radio]:hover + label
+{
+transform: scale(1.1);
+}
+
+
+input#transportation[type=radio] + label
+{
+background-image: url("../images/transportation.png");
+background-position: center;
+background-repeat: no-repeat;
+background-size: 40px;
+height: 50px;
+width: 50px;
+display:inline-block;
+padding: 0 0 0 0px;
+margin-right:10px;
+transition: all .1s ease-in-out;
+cursor: pointer;
+opacity: .5;
+-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+
+input#transportation[type=radio]:checked + label
+{
+opacity: 1;
+}
+
+input#transportation[type=radio]:hover + label
+{
+transform: scale(1.1);
+}
+
+input#utilities[type=radio] + label
+{
+background-image: url("../images/utilities.png");
+background-position: center;
+background-repeat: no-repeat;
+background-size: 40px;
+height: 50px;
+width: 50px;
+display:inline-block;
+padding: 0 0 0 0px;
+margin-right:10px;
+transition: all .1s ease-in-out;
+cursor: pointer;
+opacity: .5;
+-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+input#utilities[type=radio]:checked + label
+{
+opacity: 1;
+}
+
+input#utilities[type=radio]:hover + label
+{
+transform: scale(1.1);
+}
+
+input#health[type=radio] + label
+{
+background-image: url("../images/health.png");
+background-position: center;
+background-repeat: no-repeat;
+background-size: 40px;
+height: 50px;
+width: 50px;
+display:inline-block;
+padding: 0 0 0 0px;
+margin-right:10px;
+transition: all .1s ease-in-out;
+cursor: pointer;
+opacity: .5;
+-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+input#health[type=radio]:checked + label
+{
+opacity: 1;
+}
+
+input#health[type=radio]:hover + label
+{
+transform: scale(1.1);
+}
+
+input#liesures[type=radio] + label
+{
+background-image: url("../images/liesure.png");
+background-position: center;
+background-repeat: no-repeat;
+background-size: 40px;
+height: 50px;
+width: 50px;
+display:inline-block;
+padding: 0 0 0 0px;
+margin-right:10px;
+transition: all .1s ease-in-out;
+cursor: pointer;
+opacity: .5;
+-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+input#liesures[type=radio]:checked + label
+{
+opacity: 1;
+}
+
+input#liesures[type=radio]:hover + label
+{
+transform: scale(1.1);
+}
+
+input#shopping[type=radio] + label
+{
+background-image: url("../images/shopping.png");
+background-position: center;
+background-repeat: no-repeat;
+background-size: 40px;
+height: 50px;
+width: 50px;
+display:inline-block;
+padding: 0 0 0 0px;
+transition: all .1s ease-in-out;
+cursor: pointer;
+opacity: .5;
+-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+
+input#shopping[type=radio]:checked + label
+{
+opacity: 1;
+}
+
+input#shopping[type=radio]:hover + label
+{
+transform: scale(1.1);
+}
+
+
