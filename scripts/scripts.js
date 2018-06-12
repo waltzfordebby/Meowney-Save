@@ -246,7 +246,7 @@
 	     
 
 
-
+	 //FUNCTION THAT LOAD AND OUT ALL EXPENSES DATA
 	function loadExpenses(){
 
 		 var xhr = new XMLHttpRequest();
@@ -258,18 +258,90 @@
 			 	var expenses = JSON.parse(this.responseText);
 			 	var output = '';
 			 	for (var i in expenses){
+
+			 		 var amount = expenses[i].amount;
+			 		 var food = expenses[i].food;
+			 		 var transportation = expenses[i].transportation;
+			 		 var utilities = expenses[i].utilities;
+			 		 var health = expenses[i].health;
+			 		 var liesures = expenses[i].liesures;	
+			 		 var shopping = expenses[i].shopping;
+			 		 var description = expenses[i].description;
+			 		 var is_created = expenses[i].is_created;
+
+			 		 function foodResult(){
+			 		 	 if(food == 1){
+			 		 	 return '<li class="list-group-item"> Food: '+amount+'</li>';
+			 		 	 }else {
+			 		 		return  '';
+			 		 	 }
+			 		 }	
+
+
+			 		 function transportationResult(){
+			 		 	 if(transportation == 1){
+			 		 	 return '<li class="list-group-item"> Transportation: '+transportation+'</li>';
+			 		 	 }else {
+			 		 		return  '';
+			 		 	 }
+			 		 }	
+
+			 		 function utilitiesResult(){
+			 		 	 if(utilities == 1){
+			 		 	 return '<li class="list-group-item"> Utilities: '+utilities+'</li>';
+			 		 	 }else {
+			 		 		return  '';
+			 		 	 }
+			 		 }	
+
+			 		 function healthResult(){
+			 		 	 if(health == 1){
+			 		 	 return '<li class="list-group-item"> Utilities: '+health+'</li>';
+			 		 	 }else {
+			 		 		return  '';
+			 		 	 }
+			 		 }	
+
+			 		 function liesuresResult(){
+			 		 	 if(liesures == 1){
+			 		 	 return '<li class="list-group-item"> Utilities: '+liesures+'</li>';
+			 		 	 }else {
+			 		 		return  '';
+			 		 	 }
+			 		 }	
+
+			 		 function shoppingResult(){
+			 		 	 if(shopping == 1){
+			 		 	 return '<li class="list-group-item"> Utilities: '+shopping+'</li>';
+			 		 	 }else {
+			 		 		return  '';
+			 		 	 }
+			 		 }	
+
+
+
+			 		 // console.log(amount);
+			 		 // console.log(food);
+			 		 // console.log(transportation);
+			 		 // console.log(utilities);
+			 		 // console.log(health);
+			 		 // console.log(liesures);
+			 		 // console.log(shopping);
+			 		 // console.log(description);
+			 		 // console.log(is_created);
+
 			 	output +=
 			 	'<h4> No. '+[i]+'</h4>'+
 			 	'<ul class="list-group">'+
-			 	'<li class="list-group-item"> Amount: '+expenses[i].amount+'</li>'+
-			 	'<li class="list-group-item"> Food: '+expenses[i].food+'</li>'+
-			 	'<li class="list-group-item"> Transportation: '+expenses[i].transportation+'</li>'+
-			 	'<li class="list-group-item"> Utilities: '+expenses[i].utilities+'</li>'+
-			 	'<li class="list-group-item"> Health: '+expenses[i].health+'</li>'+
-			 	'<li class="list-group-item"> Liesures: '+expenses[i].liesures+'</li>'+
-			 	'<li class="list-group-item"> Shopping: '+expenses[i].shopping+'</li>'+
-			 	'<li class="list-group-item"> Description: '+expenses[i].description+'</li>'+
-			 	'<li class="list-group-item"> Created: '+expenses[i].is_created+'</li>'+
+			 	'<li class="list-group-item"> Amount: '+amount+'</li>'+
+			 	foodResult()+
+			 	transportationResult()+
+			 	utilitiesResult()+
+			 	healthResult()+
+			 	liesuresResult()+
+			 	shoppingResult()+
+			 	'<li class="list-group-item"> Description: '+description+'</li>'+
+			 	'<li class="list-group-item"> Created: '+is_created+'</li>'+
 			 	'</ul>'+
 			 	'<br>'
 			 	}
@@ -279,5 +351,8 @@
 		}
 
 		xhr.send();
+
+		//CLEAR THE FORM INPUTS 
+		return clearFunction();
 	}
 
