@@ -212,7 +212,7 @@
 				 var xhr = new XMLHttpRequest();
 
 				 //OPENS THE PROCESS.PHP
-				 xhr.open('POST','insert-to-database.php',true);
+				 xhr.open('POST','php/insert-to-database.php',true);
 
 				 //SET THE REQUEST HEADER
 		         xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
@@ -249,73 +249,87 @@
 	 //FUNCTION THAT LOAD AND OUT ALL EXPENSES DATA
 	function loadExpenses(){
 
+		 //SET XMLHTTP REQUEST
 		 var xhr = new XMLHttpRequest();
-		 xhr.open('GET','queries.php',true);
+		 //OPEN QUERIES AND GET DATA
+		 xhr.open('GET','php/queries.php',true);
 
+		 //ONLOAD FUNCTION
 		 xhr.onload = function(){
+
+		 	 //IF LOAD STATUS IS OK
 			 if(this.status == 200){
 
-			 	var expenses = JSON.parse(this.responseText);
-			 	var output = '';
-			 	for (var i in expenses){
+			 	 //GET THE DATA IN JSON FORMAT
+			 	 var expenses = JSON.parse(this.responseText);
 
-			 		 var amount = expenses[i].amount;
-			 		 var food = expenses[i].food;
-			 		 var transportation = expenses[i].transportation;
-			 		 var utilities = expenses[i].utilities;
-			 		 var health = expenses[i].health;
-			 		 var liesures = expenses[i].liesures;	
-			 		 var shopping = expenses[i].shopping;
-			 		 var description = expenses[i].description;
-			 		 var date_created = expenses[i].date_created;
-			 		 var time_created = expenses[i].time_created;
+			 	 //SET THE OUPUT TO STRING
+			 	 var output = '';
 
+			 	 //LOOP TO EXPENSES
+			 	 for (var i in expenses){
 
+			 		 var amount = expenses[i].amount; // GET THE AMOUNT VALUE
+			 		 var food = expenses[i].food; //GET THE FOOD VALUE
+			 		 var transportation = expenses[i].transportation; //GET THE TRANSPORTATION VALUE
+			 		 var utilities = expenses[i].utilities; //GET THE UTILITIES VALUE
+			 		 var health = expenses[i].health; //GET THE HEALTH VALUE
+			 		 var liesures = expenses[i].liesures; // GET THE LIESURES VALUE
+			 		 var shopping = expenses[i].shopping; //GET THE SHOPPING VALUE
+			 		 var description = expenses[i].description; //GET THE DESCRIPTION VALUE
+			 		 var date_created = expenses[i].date_created; //GET THE CREATION DATA
+			 		 var time_created = expenses[i].time_created; // GET THE CREATION TIME
+ 
+ 					 //FOOD RESULT FUNCTION
 			 		 function foodResult(){
-			 		 	 if(food == 1){
+			 		 	 if(food == 1){ //IF FOOD IS TRUE RETURN THIS LIST
 			 		 	 return '<li class="list-group-item">Category:<div class="category-container"><div class="food-output" title="Food"></div></div></li>';
-			 		 	 }else {
+			 		 	 }else { //ELSE RETURN NOTHING
 			 		 		return  '';
 			 		 	 }
 			 		 }	
 
-
+			 		 //TRANSPORTATION RESULT FUNCTION
 			 		 function transportationResult(){
-			 		 	 if(transportation == 1){
+			 		 	 if(transportation == 1){ //IF TRANSPORTATION IS TRUE RETURN THIS LIST
 			 		 	 return '<li class="list-group-item">Category:<div class="category-container"><div class="transportation-output" title="Transportation"></div></div></li>';
-			 		 	 }else {
+			 		 	 }else { //ELSE RETURN NOTHING
 			 		 		return  '';
 			 		 	 }
 			 		 }	
 
+			 		 //UTILITIES RESULT FUNCTION
 			 		 function utilitiesResult(){
-			 		 	 if(utilities == 1){
+			 		 	 if(utilities == 1){ //IF UTILITIES IS TRUE RETURN THIS LIST
 			 		 	 return '<li class="list-group-item">Category:<div class="category-container"><div class="utilities-output" title="Utilities"></div></div></li>';
-			 		 	 }else {
+			 		 	 }else { //ELSE RETURN NOTHING
 			 		 		return  '';
 			 		 	 }
 			 		 }	
-
+ 					 
+ 					 //HEALTH RESULT FUNCTION
 			 		 function healthResult(){
-			 		 	 if(health == 1){
+			 		 	 if(health == 1){ //IF HEALTH IS TRUE RETURN THIS LIST
 			 		 	 return '<li class="list-group-item">Category:<div class="category-container"><div class="health-output" title="Health"></div></div></li>';
-			 		 	 }else {
+			 		 	 }else { //ELSE RETURN NOTHING
 			 		 		return  '';
 			 		 	 }
 			 		 }	
 
+			 		 //LIESURES RESULT FUNCTION
 			 		 function liesuresResult(){
-			 		 	 if(liesures == 1){
+			 		 	 if(liesures == 1){ //IF LIESURES IS TRUE RETURN THIS LIST
 			 		 	 return '<li class="list-group-item">Category:<div class="category-container"><div class="liesures-output" title="Liesures"></div></div></li>';
-			 		 	 }else {
+			 		 	 }else { //ELSE RETURN NOTHING
 			 		 		return  '';
 			 		 	 }
 			 		 }	
 
+			 		 //SHOPPING RESULT FUNCTION
 			 		 function shoppingResult(){
-			 		 	 if(shopping == 1){
+			 		 	 if(shopping == 1){//IF SHOPPING IS TRUE RETURN THIS LIST
 			 		 	 return '<li class="list-group-item">Category:<div class="category-container"><div class="shopping-output" title="Transportation"></div></div></li>';
-			 		 	 }else {
+			 		 	 }else { //ELSE RETURN NOTHING
 			 		 		return  '';
 			 		 	 }
 			 		 }	
@@ -332,40 +346,39 @@
 			 		 // console.log(description);
 			 		 // console.log(is_created);
 
-			 	output +=
-			 	'<div id="accordion">'+
-			 	'<div class="card">'+
-			 	' <div class="card-header" id="heading'+[i]+'">'+
-			 	'<h5 class="mb-0">'+
-				  '<span class="btn btn-link" data-toggle="collapse" data-target="#collapse'+[i]+'" aria-expanded="true" aria-controls="collapse'+[i]+'">'+
-				          'Date: '+date_created+ ' | Time: '+time_created+
-				        '</span>'+
-				      '</h5>'+
-				    '</div>'+
-				'<div id="collapse'+[i]+'" class="collapse" aria-labelledby="heading'+[i]+'" data-parent="#accordion">'+
-				'<div class="card-body">'+    
-			 	'<ul class="list-group">'+
-			 	'<li class="list-group-item"> Amount: ₱'+amount+'</li>'+
-			 	foodResult()+
-			 	transportationResult()+
-			 	utilitiesResult()+
-			 	healthResult()+
-			 	liesuresResult()+
-			 	shoppingResult()+
-			 	'<li class="list-group-item"> Description: '+description+'</li>'+
-			 	'</ul>'+
-			 	'</div>'+
-				    '</div>'+
-				  '</div>'+
-
-			 	'<br>'
-			 	} 
-
-			 	document.getElementById('expenses').innerHTML = output;
+			 	output += //SET THE VALUE OF OUTPUT TO BOOTSTRAP ACCORDION
+				 '<div id="accordion">'+
+				 	 '<div class="card">'+
+				 	     '<div class="card-header" id="heading'+[i]+'">'+ //HEADING ID NUMBER
+			                 '<h5 class="mb-0">'+
+				                 '<span class="btn btn-link" data-toggle="collapse" data-target="#collapse'+[i]+'" aria-expanded="true" aria-controls="collapse'+[i]+'">'+
+				                     'Date: '+date_created+ ' | Time: '+time_created+ //OUPUT DATE AND TIME CREATION
+				                 '</span>'+
+				                 '</h5>'+
+				             '</div>'+
+				
+				 '<div id="collapse'+[i]+'" class="collapse" aria-labelledby="heading'+[i]+'" data-parent="#accordion">'+ //HEADING ID NUMBER
+				     '<div class="card-body">'+    
+			             '<ul class="list-group">'+
+			                 '<li class="list-group-item"> Amount: ₱'+amount+'</li>'+ //OUTPUT THE AMOUNT
+							 foodResult()+ //OUTPUT FOOD RESULT
+							 transportationResult()+ //OUTPUT TRANSPORTATION RESULT
+							 utilitiesResult()+ //OUTPUT UTILITIES RESULT
+							 healthResult()+ //OUTPUT HEALTH RESULT
+							 liesuresResult()+ //OUTPUT LIESURES RESULT
+							 shoppingResult()+ //OUTPUT SHOPPING RESULT
+			 	             '<li class="list-group-item"> Description: '+description+'</li>'+ //OUTPUT DESCRIPTION
+			             '</ul>'+
+			 	         '</div>'+
+				     '</div>'+
+				 '</div>'+
+			 	 '<br>'
+			 	 } 
+			 	document.getElementById('expenses').innerHTML = output; //ADD OUTPUT TO expenses div 
 			 }
 		}
 
-		xhr.send();
+		xhr.send(); //SEND THE REQUEST
 
 		//CLEAR THE FORM INPUTS 
 		return clearFunction();
