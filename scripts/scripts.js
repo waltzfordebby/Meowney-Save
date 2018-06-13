@@ -18,7 +18,17 @@
 			 document.getElementById("descriptionValidate").innerHTML = ""; //SET THE VALUE OF DESCRIPTION VALIDATION CONTAINER TO BLANK
 
 			 console.log('Content Cleared'); //OUTPUTED WHEN ALL THE VALUE IS EMPTY
+
+			 return getYear(); //RETURN FOOTER CONTENT
+			 
 		 }	
+
+		  //FOOTER YEAR FUNCTION
+		  function getYear(){
+			      var d = new Date(); //GET THE DATE 
+ 			      var n = d.getFullYear(); //GET THE YEAR
+ 			      document.getElementById('copyrightYear').innerHTML = '&copy '+n+' Meowney Save'; //SET THE VALUE OF <p id="copyrightYear"> TO © 2018 Meowney Save
+			 }
 
 		 //VALIDATE FORM INPUTS
 		 function validateDatas(){
@@ -382,5 +392,9 @@
 
 		//CLEAR THE FORM INPUTS 
 		return clearFunction();
+
+
 	}
+
+
 
