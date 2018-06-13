@@ -267,11 +267,13 @@
 			 		 var liesures = expenses[i].liesures;	
 			 		 var shopping = expenses[i].shopping;
 			 		 var description = expenses[i].description;
-			 		 var is_created = expenses[i].is_created;
+			 		 var date_created = expenses[i].date_created;
+			 		 var time_created = expenses[i].time_created;
+
 
 			 		 function foodResult(){
 			 		 	 if(food == 1){
-			 		 	 return '<li class="list-group-item"> Food: '+amount+'</li>';
+			 		 	 return '<li class="list-group-item">Category:<div class="category-container"><div class="food-output" title="Food"></div></div></li>';
 			 		 	 }else {
 			 		 		return  '';
 			 		 	 }
@@ -280,7 +282,7 @@
 
 			 		 function transportationResult(){
 			 		 	 if(transportation == 1){
-			 		 	 return '<li class="list-group-item"> Transportation: '+transportation+'</li>';
+			 		 	 return '<li class="list-group-item">Category:<div class="category-container"><div class="transportation-output" title="Transportation"></div></div></li>';
 			 		 	 }else {
 			 		 		return  '';
 			 		 	 }
@@ -288,7 +290,7 @@
 
 			 		 function utilitiesResult(){
 			 		 	 if(utilities == 1){
-			 		 	 return '<li class="list-group-item"> Utilities: '+utilities+'</li>';
+			 		 	 return '<li class="list-group-item">Category:<div class="category-container"><div class="utilities-output" title="Utilities"></div></div></li>';
 			 		 	 }else {
 			 		 		return  '';
 			 		 	 }
@@ -296,7 +298,7 @@
 
 			 		 function healthResult(){
 			 		 	 if(health == 1){
-			 		 	 return '<li class="list-group-item"> Utilities: '+health+'</li>';
+			 		 	 return '<li class="list-group-item">Category:<div class="category-container"><div class="health-output" title="Health"></div></div></li>';
 			 		 	 }else {
 			 		 		return  '';
 			 		 	 }
@@ -304,7 +306,7 @@
 
 			 		 function liesuresResult(){
 			 		 	 if(liesures == 1){
-			 		 	 return '<li class="list-group-item"> Utilities: '+liesures+'</li>';
+			 		 	 return '<li class="list-group-item">Category:<div class="category-container"><div class="liesures-output" title="Liesures"></div></div></li>';
 			 		 	 }else {
 			 		 		return  '';
 			 		 	 }
@@ -312,7 +314,7 @@
 
 			 		 function shoppingResult(){
 			 		 	 if(shopping == 1){
-			 		 	 return '<li class="list-group-item"> Utilities: '+shopping+'</li>';
+			 		 	 return '<li class="list-group-item">Category:<div class="category-container"><div class="shopping-output" title="Transportation"></div></div></li>';
 			 		 	 }else {
 			 		 		return  '';
 			 		 	 }
@@ -331,9 +333,19 @@
 			 		 // console.log(is_created);
 
 			 	output +=
-			 	'<h4> No. '+[i]+'</h4>'+
+			 	'<div id="accordion">'+
+			 	'<div class="card">'+
+			 	' <div class="card-header" id="heading'+[i]+'">'+
+			 	'<h5 class="mb-0">'+
+				  '<span class="btn btn-link" data-toggle="collapse" data-target="#collapse'+[i]+'" aria-expanded="true" aria-controls="collapse'+[i]+'">'+
+				          'Date: '+date_created+ ' | Time: '+time_created+
+				        '</span>'+
+				      '</h5>'+
+				    '</div>'+
+				'<div id="collapse'+[i]+'" class="collapse" aria-labelledby="heading'+[i]+'" data-parent="#accordion">'+
+				'<div class="card-body">'+    
 			 	'<ul class="list-group">'+
-			 	'<li class="list-group-item"> Amount: '+amount+'</li>'+
+			 	'<li class="list-group-item"> Amount: ₱'+amount+'</li>'+
 			 	foodResult()+
 			 	transportationResult()+
 			 	utilitiesResult()+
@@ -341,10 +353,13 @@
 			 	liesuresResult()+
 			 	shoppingResult()+
 			 	'<li class="list-group-item"> Description: '+description+'</li>'+
-			 	'<li class="list-group-item"> Created: '+is_created+'</li>'+
 			 	'</ul>'+
+			 	'</div>'+
+				    '</div>'+
+				  '</div>'+
+
 			 	'<br>'
-			 	}
+			 	} 
 
 			 	document.getElementById('expenses').innerHTML = output;
 			 }

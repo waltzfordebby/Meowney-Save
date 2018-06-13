@@ -17,11 +17,11 @@ $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES,false); //ALLOWS YOU TO USE LIMIT
 
 
 
-$stmt = $pdo->query('SELECT * FROM expenses_data');
-$row = $stmt->fetchAll();
+$stmt = $pdo->query('SELECT * FROM expenses_data'); //MAKE A QUERY FROM expenses_data table
+$row = $stmt->fetchAll(); //FETCH ALL THEDATA FROM expenses_data table
 
 
-echo json_encode($row);	
+echo json_encode($row); //CONVERT THE DATA FROM expenses_data table to json format
 
 
 
