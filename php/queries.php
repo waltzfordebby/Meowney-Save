@@ -17,15 +17,11 @@ $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES,false); //ALLOWS YOU TO USE LIMIT
 
 
 
-$stmt = $pdo->query('SELECT * FROM expenses_data'); //MAKE A QUERY FROM expenses_data table
+$stmt = $pdo->query('SELECT * FROM expenses_data ORDER BY date_created DESC, time_created DESC'); //MAKE A QUERY FROM expenses_data table in descending //order base on date creation
 $row = $stmt->fetchAll(); //FETCH ALL THEDATA FROM expenses_data table
 
 
 echo json_encode($row); //CONVERT THE DATA FROM expenses_data table to json format
-
-
-
-
 
 
 

@@ -87,7 +87,9 @@ body {
 	background-image: url("../images/logo_1_responsive.png") !important;
 }
 
-
+.margin-top-respon {
+	margin-top:50px;
+}
 
 }
 /* --------------*/
