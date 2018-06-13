@@ -475,4 +475,107 @@ input#shopping[type=radio]:hover + label
 transform: scale(1.1);
 }
 
+/*CATEGORY OUTPUT ICONS */
+.category-container{
+	width: 80%;
+	float: right;
+}
+
+.food-output {
+background-image: url("../images/food.png");
+background-position: center;
+background-repeat: no-repeat;
+background-size: 40px;
+height: 50px;
+width: 50px;
+float: left;
+transition: all .1s ease-in-out;
+}
+
+.food-output:hover{
+transform: scale(1.1);
+}
+
+
+.transportation-output {
+background-image: url("../images/transportation.png");
+background-position: center;
+background-repeat: no-repeat;
+background-size: 40px;
+height: 50px;
+width: 50px;
+float: left;
+transition: all .1s ease-in-out;
+}
+
+.transportation-output:hover{
+transform: scale(1.1);
+}
+
+.utilities-output {
+background-image: url("../images/utilities.png");
+background-position: center;
+background-repeat: no-repeat;
+background-size: 40px;
+height: 50px;
+width: 50px;
+float: left;
+transition: all .1s ease-in-out;
+}
+
+.utilities-output:hover{
+transform: scale(1.1);
+}
+
+.health-output {
+background-image: url("../images/health.png");
+background-position: center;
+background-repeat: no-repeat;
+background-size: 40px;
+height: 50px;
+width: 50px;
+float: left;
+transition: all .1s ease-in-out;
+}
+
+.health-output:hover{
+transform: scale(1.1);
+}
+
+.liesures-output {
+background-image: url("../images/liesure.png");
+background-position: center;
+background-repeat: no-repeat;
+background-size: 40px;
+height: 50px;
+width: 50px;
+float: left;
+transition: all .1s ease-in-out;
+}
+
+.liesures-output:hover{
+transform: scale(1.1);
+}
+
+.shopping-output {
+background-image: url("../images/shopping.png");
+background-position: center;
+background-repeat: no-repeat;
+background-size: 40px;
+height: 50px;
+width: 50px;
+float: left;
+transition: all .1s ease-in-out;
+}
+
+.shopping-output:hover{
+transform: scale(1.1);
+}
+
+
+
+
+
+
+
 

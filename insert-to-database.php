@@ -16,6 +16,16 @@ $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ); //SET THE DATA
 $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES,false); //ALLOWS YOU TO USE LIMIT
 
 
+//SET TIME ZONE
+date_default_timezone_set('Asia/Taipei');
+
+//DATE CREATED
+$date_created = date("M/j/Y");
+
+//TIME CREATED
+$time_created = date('h:i:a');
+
+
 if(isset($_POST['amount'])){ //IF AMOUNT IS SET
 $amount = $_POST['amount']; //SET $amount variable equals to AMOUNT INPUT VALUE
 }else { //IF THE AMOUNT IS NOT SET
@@ -76,10 +86,10 @@ $description = $_POST['description']; //SET $description variable equals to AMOU
 
 
 
-$sql = 'INSERT INTO expenses_data (amount,food,transportation,utilities,health,liesures,shopping,description) VALUES (:amount, :food, :transportation,:utilities,:health,:liesures,:shopping,:description)'; //INSERT THE AMOUNT, FOOD, TRANSPORTATION, UTILITIES, HEALTH, LIESURES, SHOPPING, DESCRIPTION VALUES TO DATABASE
+$sql = 'INSERT INTO expenses_data (amount,food,transportation,utilities,health,liesures,shopping,description,date_created,time_created) VALUES (:amount, :food, :transportation,:utilities,:health,:liesures,:shopping,:description,:date_created,:time_created)'; //INSERT THE AMOUNT, FOOD, TRANSPORTATION, UTILITIES, HEALTH, LIESURES, SHOPPING, DESCRIPTION VALUES TO DATABASE
 $stmt = $pdo->prepare($sql); //PREPARE THE SQL INSERT REQUEST
 $stmt->execute(['amount'=> $amount, 'food'=> $food, 'transportation' => $transportation,  'utilities' => $utilities, 'health' => $health, 'liesures' => 
-	$liesures,'shopping' => $shopping, 'description' => $description ]); //EXECUTE THE SQL INSERT REQUEST AND SET THE VALUES OF DATAS
+	$liesures,'shopping' => $shopping, 'description' => $description, 'date_created'=>$date_created, 'time_created' =>$time_created]); //EXECUTE THE SQL INSERT REQUEST AND SET THE VALUES OF DATAS
 
 echo 'Data Added!'; //OUTPUT THIS WHEN THE DATA IS ADDED TO DATABASE
 
