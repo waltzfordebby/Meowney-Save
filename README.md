@@ -1,2 +1,1 @@
-# Meowney-Save
-Web application that records daily expenses ( HTML, CSS, JAVASCRIPT, AJAX, PHP (PDO), MYSQL ).
+# Meowney-SaveWeb application that records daily expenses. Built using ( HTML, CSS, BOOTSTRAP, JAVASCRIPT, AJAX, PHP (PDO), MYSQL ). 
