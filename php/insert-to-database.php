@@ -23,7 +23,7 @@ date_default_timezone_set('Asia/Taipei');
 $date_created = date("M/j/Y");
 
 //TIME CREATED
-$time_created = date('h:i:a');
+$time_created = date('h:ia');
 
 
 if(isset($_POST['amount'])){ //IF AMOUNT IS SET

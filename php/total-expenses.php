@@ -17,12 +17,11 @@ $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES,false); //ALLOWS YOU TO USE LIMIT
 
 
 
-$stmt = $pdo->query('SELECT * FROM expenses_data ORDER BY id DESC'); //MAKE A QUERY FROM expenses_data table in descending //order base on date creation
-$row = $stmt->fetchAll(); //FETCH ALL THEDATA FROM expenses_data table
+$sql = 'SELECT SUM(amount) AS amount_total FROM expenses_data'; // SELECT amount from expenses_data ang get the sum of amount and set it to amount_total
+$stmt = $pdo->prepare($sql); //Prepare the query
+$stmt->execute(); //Execute the query
 
+$sum = $stmt->fetchAll(); //Set all the fetch data to sum
 
-echo json_encode($row); //CONVERT THE DATA FROM expenses_data table to json format
+echo json_encode($sum); //CONVERT THE SUM TO  json format
 
-
-
-?>
