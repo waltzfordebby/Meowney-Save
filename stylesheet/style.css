@@ -50,6 +50,16 @@ STYLESHEET FOR PRACTICE
 }
 
 
+.letters-for-learners{
+	font-family: Letters_for_learners;
+}
+
+.letters-for-learners-20{
+	font-family: Letters_for_learners;
+	font-size: 20px;
+}
+
+
 /*-----*/
 
 /*-------------------*/
@@ -574,6 +584,68 @@ transition: all .1s ease-in-out;
 transform: scale(1.1);
 }
 
+.summary-title{
+	cursor: pointer;
+	color: #007bff;
+	font-size: 25px;
+	font-family: Letters_for_learners;
+	 -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+
+
+.summary-title:hover{
+  color: #0056b3;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.delete-container {
+	width:10%;
+	display: inline-block;
+	float: right;
+	margin-left: 8px;
+}
+
+.delete-button{
+	float: right;
+	background-color: #CD5C5C;
+    border: none;
+    color: white;
+    padding: 3px 3px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.delete-button:hover{
+	background-color: #DC143C;
+}
+
+.edit-container {
+	width:10%;
+	display: inline-block;
+	float: right;
+}
+
+.edit-button{
+	float: right;
+	background-color: #6495ED;
+    border: none;
+    color: white;
+    padding: 3px 3px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.edit-button:hover{
+	background-color: #4682B4;
+}
 
 
 

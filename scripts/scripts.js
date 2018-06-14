@@ -18,7 +18,6 @@
 			 document.getElementById("descriptionValidate").innerHTML = ""; //SET THE VALUE OF DESCRIPTION VALIDATION CONTAINER TO BLANK
 
 			 console.log('Content Cleared'); //OUTPUTED WHEN ALL THE VALUE IS EMPTY
-
 			 return getYear(); //RETURN FOOTER CONTENT
 			 
 		 }	
@@ -182,7 +181,34 @@
 		 }
 
 
+		 //FUNCTION FOR GET THE TOTAL OF AMOUNT
+		 function loadTotal(){
+	 	 	
+	 	 	 var xhr = new XMLHttpRequest(); //SET VAR XHR TO NEW XMLHTTPREQUEST
+	 	 	 xhr.open('GET','php/total-expenses.php',true); // OPEN AND GET THE DATA FORM php/total-expenses.php
 
+	 	 	 xhr.onload = function(){ //ONLOAD FUNCTION
+	 	 	 if (this.status == 200){  //IF THE STATUS IS OK EXECUTE THE COMMANDS
+
+	 	 			 var total = JSON.parse(this.responseText); //SET THE VALUE OF TOTAL TO THE CONTENT OF total-expenses.php and parse it into json
+
+	 	 			 var output = ''; //Set the output variable to stirng
+
+	 	 			 for (var i in total){ //Loop inside total
+
+	 	 				 var total_amount = total[i].amount_total;  //Set the value of total_amount to total json
+
+	 	 				 output += '<h4>₱'+total_amount+'</h4>' //Set the value of output to heading 4 with total_amount value inside
+	 	 			 }
+
+	 	 		 }
+
+	 	 			 document.getElementById('total_expenses').innerHTML = output;//Ouput the output value inside the total_expenses span
+	 	 		 }
+	 	 			 xhr.send(); //Send the request
+	 	 }
+
+	 	 	  
 		 //PASS THE INPUTS DATA TO PROCESS.PHP USING AJAX
 	 	 function loadBudget(e){
 		 e.preventDefault();
@@ -248,13 +274,12 @@
 		         return clearFunction();
 
 
-	         }else//IF ONE DATA OR ALL DATAS ENTERED ARE NOT VALID EXECUTE THIS{
+	         }else{//IF ONE DATA OR ALL DATAS ENTERED ARE NOT VALID EXECUTE THIS{
 
 		         console.log('Data is still on hold!');
 	         }
-
+	     }
 	     
-
 
 	 //FUNCTION THAT LOAD AND OUT ALL EXPENSES DATA
 	function loadExpenses(){
@@ -277,8 +302,8 @@
 			 	 var output = '';
 
 			 	 //LOOP TO EXPENSES
-			 	 for (var i in expenses){
-
+			 	 for (var i  in expenses){
+			 	 	 var id = expenses[i].id; //GET THE ID NUMBER
 			 		 var amount = expenses[i].amount; // GET THE AMOUNT VALUE
 			 		 var food = expenses[i].food; //GET THE FOOD VALUE
 			 		 var transportation = expenses[i].transportation; //GET THE TRANSPORTATION VALUE
@@ -344,6 +369,9 @@
 			 		 	 }
 			 		 }	
 
+			 		
+			 		 i++; //SET THE STARTING NUMBER TO 1
+
 
 
 			 		 // console.log(amount);
@@ -357,19 +385,22 @@
 			 		 // console.log(is_created);
 
 			 	output += //SET THE VALUE OF OUTPUT TO BOOTSTRAP ACCORDION
-				 '<div id="accordion">'+
+				 '<div id="accordion" class="mt-2">'+
 				 	 '<div class="card">'+
 				 	     '<div class="card-header" id="heading'+[i]+'">'+ //HEADING ID NUMBER
-			                 '<h5 class="mb-0">'+
-				                 '<span class="btn btn-link" data-toggle="collapse" data-target="#collapse'+[i]+'" aria-expanded="true" aria-controls="collapse'+[i]+'">'+
-				                     'Date: '+date_created+ ' | Time: '+time_created+ //OUPUT DATE AND TIME CREATION
-				                 '</span>'+
+			                 '<h5 class="mb-0">'+'<div>'+
+			                 	 '<div style="display: inline-block" class="summary-title" data-toggle="collapse" data-target="#collapse'+[i]+'" aria-expanded="true" aria-controls="collaps'+[i]+'">Number: '+id+'</div>'+
+			                 	 '<div class="delete-container"><button type="button" class="delete-button"><i class="far fa-trash-alt fa-sm"></i></button></div>'+
+			                 	 '<div class="edit-container"><button type="button" class="edit-button"><i class="fas fa-pencil-alt fa-sm"></i></button></div>'+
+			                 	 '</div>'+
 				                 '</h5>'+
 				             '</div>'+
 				
 				 '<div id="collapse'+[i]+'" class="collapse" aria-labelledby="heading'+[i]+'" data-parent="#accordion">'+ //HEADING ID NUMBER
 				     '<div class="card-body">'+    
-			             '<ul class="list-group">'+
+			             '<ul class="list-group letters-for-learners-20">'+
+			             	 '<li class="list-group-item"> Date Created: '+date_created+'</li>'+ //OUTPUT THE CREATION DATE
+			             	 '<li class="list-group-item"> Time Created: '+time_created+'</li>'+ //OUTPUT THE CREATION TIME 
 			                 '<li class="list-group-item"> Amount: ₱'+amount+'</li>'+ //OUTPUT THE AMOUNT
 							 foodResult()+ //OUTPUT FOOD RESULT
 							 transportationResult()+ //OUTPUT TRANSPORTATION RESULT
@@ -381,14 +412,16 @@
 			             '</ul>'+
 			 	         '</div>'+
 				     '</div>'+
-				 '</div>'+
-			 	 '<br>'
+				 '</div>';
 			 	 } 
 			 	document.getElementById('expenses').innerHTML = output; //ADD OUTPUT TO expenses div 
 			 }
 		}
 
 		xhr.send(); //SEND THE REQUEST
+		 
+		 //RETURN THE TOTAL AMOUNT
+		  loadTotal();
 
 		//CLEAR THE FORM INPUTS 
 		return clearFunction();
@@ -396,5 +429,8 @@
 
 	}
 
+ 
 
 
+
+	 
