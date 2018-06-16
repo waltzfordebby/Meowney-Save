@@ -1,7 +1,47 @@
 
-		//EVENT LISTENER FOR FORM SUBMISSION
-		document.getElementById('postForm').addEventListener('submit',loadBudget); /*GETS the form id. When the form is submitted loadBudget function is executed*/
-	
+		 //EVENT LISTENER FOR FORM SUBMISSION
+		 document.getElementById('postForm').addEventListener('submit',loadBudget); /*GETS the form id. When the form is submitted loadBudget function is executed*/
+
+
+		 //CREATE ELEMENT BUTTON
+		 function createDelButton(id_number){
+
+		     var  delbutton = document.createElement('button'); //CREATE ELEMENT BUTTON
+			 delbutton.className = 'delete-button'; //SET CLASS
+			 delbutton.innerHTML = '<i class="far fa-trash-alt fa-sm">'; //SET THE INNER CONTENT
+			 delbutton.setAttribute('id','delete_button'); // SET ID
+			 delbutton.setAttribute('type','button'); //SET TYPE
+			 delbutton.setAttribute('onclick','delete_expenses('+id_number+')'); //SET ONCLICK ATTRIBUTE
+			 return delbutton.outerHTML;; //RETURN delbutton content	 
+			 }
+
+ 
+
+		 //DELETE EXPENSES
+		 function delete_expenses(id_number){
+
+			 var xhr = new XMLHttpRequest(); //SEND XMLHTTPREQUEST
+
+
+			 xhr.open('POST','php/delete-expenses.php',true); // OPEN delete-expenses.php
+
+			 //SET THE REQUEST HEADER
+		     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded'); 
+
+			 var id_number ="id="+id_number; // SET $_POST[id_number] to id_number
+
+			 xhr.onload = function(){ //ON XMLHTTPREQUEST LOAD
+
+				if(this.status == 200){ //IF STATUS IS OK
+
+					 console.log(this.responseText); //GET THE OUTPUT OF delete.expenses.php
+					 loadExpenses(); //AFTER DELETETING UPDATE THE EXPENSES LIST
+				}
+			 }
+
+			 xhr.send(id_number); //SEND THE REQUEST WITH THE id_number parameter
+		 }
+	 
 
 		 //CLEAR FORM
 		 function clearFunction(){
@@ -279,6 +319,8 @@
 		         console.log('Data is still on hold!');
 	         }
 	     }
+
+
 	     
 
 	 //FUNCTION THAT LOAD AND OUT ALL EXPENSES DATA
@@ -303,7 +345,7 @@
 
 			 	 //LOOP TO EXPENSES
 			 	 for (var i  in expenses){
-			 	 	 var id = expenses[i].id; //GET THE ID NUMBER
+			 	 	 var id_number = expenses[i].id; //GET THE ID NUMBER
 			 		 var amount = expenses[i].amount; // GET THE AMOUNT VALUE
 			 		 var food = expenses[i].food; //GET THE FOOD VALUE
 			 		 var transportation = expenses[i].transportation; //GET THE TRANSPORTATION VALUE
@@ -314,7 +356,10 @@
 			 		 var description = expenses[i].description; //GET THE DESCRIPTION VALUE
 			 		 var date_created = expenses[i].date_created; //GET THE CREATION DATA
 			 		 var time_created = expenses[i].time_created; // GET THE CREATION TIME
- 
+
+
+			 		 
+
  					 //FOOD RESULT FUNCTION
 			 		 function foodResult(){
 			 		 	 if(food == 1){ //IF FOOD IS TRUE RETURN THIS LIST
@@ -389,8 +434,8 @@
 				 	 '<div class="card">'+
 				 	     '<div class="card-header" id="heading'+[i]+'">'+ //HEADING ID NUMBER
 			                 '<h5 class="mb-0">'+'<div>'+
-			                 	 '<div style="display: inline-block" class="summary-title" data-toggle="collapse" data-target="#collapse'+[i]+'" aria-expanded="true" aria-controls="collaps'+[i]+'">Number: '+id+'</div>'+
-			                 	 '<div class="delete-container"><button type="button" class="delete-button"><i class="far fa-trash-alt fa-sm"></i></button></div>'+
+			                 	 '<div style="display: inline-block" class="summary-title" data-toggle="collapse" data-target="#collapse'+[i]+'" aria-expanded="true" aria-controls="collaps'+[i]+'">Number: '+[i]+'</div>'+
+			                 	 '<div id="delete" class="delete-container">'+createDelButton(id_number)+'</div>'+
 			                 	 '<div class="edit-container"><button type="button" class="edit-button"><i class="fas fa-pencil-alt fa-sm"></i></button></div>'+
 			                 	 '</div>'+
 				                 '</h5>'+
@@ -429,8 +474,6 @@
 
 	}
 
- 
 
+	
 
-
-	 
