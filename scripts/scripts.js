@@ -3,12 +3,14 @@
 		 document.getElementById('postForm').addEventListener('submit',loadBudget); /*GETS the form id. When the form is submitted loadBudget function is executed*/
 
 
+
+
 		 //CREATE ELEMENT BUTTON
 		 function createDelButton(id_number){
 
 		     var  delbutton = document.createElement('button'); //CREATE ELEMENT BUTTON
 			 delbutton.className = 'delete-button'; //SET CLASS
-			 delbutton.innerHTML = '<i class="far fa-trash-alt fa-sm">'; //SET THE INNER CONTENT
+			 delbutton.innerHTML = '<i class="far fas fa-eraser fa-sm">'; //SET THE INNER CONTENT
 			 delbutton.setAttribute('id','delete_button'); // SET ID
 			 delbutton.setAttribute('type','button'); //SET TYPE
 			 delbutton.setAttribute('onclick','delete_expenses('+id_number+')'); //SET ONCLICK ATTRIBUTE
@@ -41,6 +43,232 @@
 
 			 xhr.send(id_number); //SEND THE REQUEST WITH THE id_number parameter
 		 }
+
+
+		 //CREATE EDIT BUTTON
+		 function createEditButton(id_number,i){
+
+		 var  editButton = document.createElement('button'); //CREATE ELEMENT BUTTON
+	     editButton.className = 'edit-button'; //SET CLASS
+		 editButton.innerHTML = '<i class="fas fa-pencil-alt fa-sm"></i>'; //SET THE INNER CONTENT
+		 editButton.setAttribute('id','edit_button'); // SET ID
+		 editButton.setAttribute('type','button'); //SET TYPE
+		 editButton.setAttribute('data-toggle','modal');
+		 editButton.setAttribute('data-target','#editModal');
+		 editButton.setAttribute('onclick','edit_expenses('+id_number+')'); //SET ONCLICK ATTRIBUTE
+		 return editButton.outerHTML;; //RETURN delbutton content	 
+
+
+		 }
+
+		 //EDIT EXPENSES FUNCTIOn
+		 function edit_expenses(id_number){
+
+			  console.log('Hello there '+id_number);
+
+			  query(id_number);
+			 
+		 }
+
+		 //EDIT QUERY FUNCTION
+		 function query(id_number){
+
+		 	//PARAMATER CONTAINING ALL THE FORM VALUES
+			 var idNumber = "idNumber="+id_number;
+
+			  //SET XMLHTTP REQUEST
+			 var xhr = new XMLHttpRequest();
+
+			 //OPEN QUERIES AND GET DATA
+			 xhr.open('POST','php/edit-expenses.php',true);
+
+			 //SET THE REQUEST HEADER
+		     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+
+			 //ONLOAD FUNCTION
+			 xhr.onload = function(){
+
+			 	 //IF LOAD STATUS IS OK
+				 if(this.status == 200){
+				 	 
+
+				 	var expense = JSON.parse(this.responseText);
+
+				 	// MODAL VARIABLES
+				 	var modalTitle = document.getElementById('editModalTitle');
+				 	var modalBody = document.getElementById('editModalBody');
+
+				 	//INPUT VARIABLES
+				 	var editAmount = document.getElementById('editAmount');
+				 	var editDescriptiom = document.getElementById('editDescription');
+
+				 	
+				 	//CATEGORY VARIABLES
+				 	var editFood  = document.getElementById('editFood');
+					var editTransportation = document.getElementById('editTransportation');
+					var editUtilities = document.getElementById('editUtilities');
+					var editHealth = document.getElementById('editHealth');
+					var editLiesures = document.getElementById('editLiesures');
+					var editShopping = document.getElementById('editShopping');
+
+				 	for(var i in expense){
+
+				
+
+					 	var id = expense[i].id;
+					 	var amount = expense[i].amount;
+					 	var food = expense[i].food;
+					 	var transportation = expense[i].transportation;
+					 	var utilities = expense[i].utilities;
+					 	var health = expense[i].health;
+					 	var liesures = expense[i].liesures;
+					 	var shopping = expense[i].shopping;
+					 	var description = expense[i].description;
+					 	var date_created = expense[i].date_created;
+					 	var time_created = expense[i].time_created;
+
+					 	//QUERY DATA
+					 	console.log(id);
+					 	console.log(amount);
+					 	console.log(food);
+					 	console.log(transportation);
+					 	console.log(utilities);
+					 	console.log(health);
+					 	console.log(liesures);
+					 	console.log(shopping);
+					 	console.log(description);
+					 	console.log(date_created);
+					 	console.log(time_created)
+
+
+				 }
+
+				 	if(food == 1){
+				 		editFood.checked = true;
+				 	}else {
+				 		editFood.checked = false;
+				 	}
+
+
+				 	if(transportation == 1){
+				 		editTransportation.checked = true;
+				 	}else{
+				 		editTransportation.checked = false;
+				 	}
+
+				 	if(utilities == 1){
+				 		editUtilities.checked = true;
+				 	}else{
+				 		editUtilities.checked = false;
+				 	}
+
+				 	if(health == 1){
+
+				 		editHealth.checked = true;
+				 	}else{
+				 		editHealth.checked = false;
+				 	}
+
+				 	if(liesures == 1){
+				 		editLiesures.checked = true; 
+				 	}else{
+				 		editLiesures.checked = false;
+				 	}
+
+				 	if(shopping == 1){
+				 		editShopping.checked = true;
+				 	}else{
+				 		editShopping.checked = false;
+				 	}
+
+
+
+				 modalTitle.innerHTML = '<i>~</i>Edit ' +date_created;
+				 editAmount.value = amount;
+				 editDescription.value = description;
+
+
+				 	
+				 	}
+
+				}
+
+				xhr.send(idNumber); //SEND THE REQUEST
+		 }
+
+
+		 //EDIT CATEGORY FUNCTIONS
+			 //GET AND SET THE VALUE OF EDIT FOOD CHECKBOX
+		     function editFoodValue() {
+		         var editFood = document.getElementById("editFood"); //GET THE VALUE OF FOOD CHECKBOX
+		         if (editFood.checked == true){ //IF FOOD CHECKBOX IS CHECKED
+		             console.log('Food Checked'); //OUTPUT THIS
+		             return editFood.value = true; //SET THE FOOD VALUE TO TRUE
+		         } else { //IF FOOD CHECKBOX IS NOT CHECKED
+		             console.log('Food Not'); //OUTPUT THIS
+		             return editFood.value = false; //SET THE FOOD VALUE TO FALSE
+		        }
+		     }
+
+		     //GET AND SET THE VALUE OF TRANSPORTATION CHECKBOX
+		     function editTransportationValue() {
+		         var editTransportation = document.getElementById("editTransportation"); //GET THE VALUE OF TRANSPORTATION CHECKBOX
+		         if (editTransportation.checked == true){ //IF FOOD TRANSPORTATION IS CHECKED
+		             console.log('Transportation Checked'); //OUTPUT THIS
+		             return editTransportation.value = true; //SET THE TRANSPORTATION VALUE TO TRUE
+		         }else { //IF TRANSPORTATION CHECKBOX IS NOT CHECKED
+		             console.log('Transportation Not'); //OUTPUT THIS
+		             return editTransportation.value = false; //SET THE TRANSPORTATION VALUE TO FALSE
+		         }
+		     }
+
+		     //GET AND SET THE VALUE OF UTILITIES CHECKBOX
+		     function editUtilitiesValue() {
+		         var editUtilities = document.getElementById("editUtilities"); //GET THE VALUE OF UTILITIES CHECKBOX
+		         if (editUtilities.checked == true){ //IF FOOD UTILITIES IS CHECKED
+		             console.log('Utilities Checked'); //OUTPUT THIS
+		             return editUtilities.value = true; //SET THE UTILITIES VALUE TO TRUE
+		         } else { //IF UTILITIES CHECKBOX IS NOT CHECKED
+		             console.log('Utilities Not'); //OUTPUT THIS
+		             return editUtilities.value = false; //SET THE UTILITIES VALUE TO FALSE
+		         }
+		     }
+
+		     //GET AND SET THE VALUE OF HEALTH CHECKBOX
+		     function editHealthValues() {
+		         var editHealth = document.getElementById("editHealth"); //GET THE VALUE OF HEALTH CHECKBOX
+		         if (editHealth.checked == true){ //IF FOOD HEALTH IS CHECKED
+		             console.log('Health Checked'); //OUTPUT THIS
+		             return editHealth.value = true; //SET THE HEALTH VALUE TO TRUE
+		         } else { //IF HEALTH CHECKBOX IS NOT CHECKED
+		             console.log('Health Not'); //OUTPUT THIS
+		             return editHealth.value = false; //SET THE HEALTH VALUE TO FALSE
+		         }
+		     }
+
+		     //GET AND SET THE VALUE OF LIESURES CHECKBOX
+		     function editLiesuresValue() {
+		         var editLiesures = document.getElementById("editLiesures"); //GET THE VALUE OF LIESURES CHECKBOX
+		         if (editLiesures.checked == true){ //IF FOOD LIESURES IS CHECKED
+		             console.log('Liesures Checked'); //OUTPUT THIS
+		              return editLiesures.value = true; //SET THE LIESURES VALUE TO TRUE
+		         } else { //IF LIESURES CHECKBOX IS NOT CHECKED
+		           console.log('Liesures Not'); //OUTPUT THIS
+		           return editLiesures.value = false; //SET THE LIESURES VALUE TO FALSE
+		         }
+		     }
+
+		     //GET AND SET THE VALUE OF SHOPPING CHECKBOX
+		     function editShoppingValue() {
+		         var editShopping = document.getElementById("editShopping"); //GET THE VALUE OF SHOPPING CHECKBOX
+		         if (editShopping.checked == true){ //IF FOOD SHOPPING IS CHECKED
+		             console.log('Shopping Checked'); //OUTPUT THIS
+		             return editShopping.value = true; //SET THE SHOPPING VALUE TO TRUE
+		         } else { //IF SHOPPING CHECKBOX IS NOT CHECKED
+		             console.log('Shopping Not'); //OUTPUT THIS
+		             return editShopping.value = false; //SET THE SHOPPING VALUE TO FALSE
+		        }
+		     }
 	 
 
 		 //CLEAR FORM
@@ -234,9 +462,15 @@
 
 	 	 			 var output = ''; //Set the output variable to stirng
 
+	 	 			
+
 	 	 			 for (var i in total){ //Loop inside total
 
 	 	 				 var total_amount = total[i].amount_total;  //Set the value of total_amount to total json
+
+	 	 				 if(total_amount == null){
+	 	 				 	total_amount = 0;
+	 	 				 }
 
 	 	 				 output += '<h4>₱'+total_amount+'</h4>' //Set the value of output to heading 4 with total_amount value inside
 	 	 			 }
@@ -434,14 +668,14 @@
 				 	 '<div class="card">'+
 				 	     '<div class="card-header" id="heading'+[i]+'">'+ //HEADING ID NUMBER
 			                 '<h5 class="mb-0">'+'<div>'+
-			                 	 '<div style="display: inline-block" class="summary-title" data-toggle="collapse" data-target="#collapse'+[i]+'" aria-expanded="true" aria-controls="collaps'+[i]+'">Number: '+[i]+'</div>'+
+			                 	 '<div style="display: inline-block" class="summary-title collapsed" data-toggle="collapse" data-target="#collapse'+[i]+'" aria-expanded="true" aria-controls="collaps'+[i]+'">'+date_created+'</div>'+
 			                 	 '<div id="delete" class="delete-container">'+createDelButton(id_number)+'</div>'+
-			                 	 '<div class="edit-container"><button type="button" class="edit-button"><i class="fas fa-pencil-alt fa-sm"></i></button></div>'+
+			                 	 '<div class="edit-container">'+createEditButton(id_number,i)+'</div>'+
 			                 	 '</div>'+
 				                 '</h5>'+
 				             '</div>'+
 				
-				 '<div id="collapse'+[i]+'" class="collapse" aria-labelledby="heading'+[i]+'" data-parent="#accordion">'+ //HEADING ID NUMBER
+				 '<div id="collapse'+[i]+'" class="collapse"  aria-labelledby="heading'+[i]+'" data-parent="#accordion">'+ //HEADING ID NUMBER
 				     '<div class="card-body">'+    
 			             '<ul class="list-group letters-for-learners-20">'+
 			             	 '<li class="list-group-item"> Date Created: '+date_created+'</li>'+ //OUTPUT THE CREATION DATE
@@ -457,7 +691,7 @@
 			             '</ul>'+
 			 	         '</div>'+
 				     '</div>'+
-				 '</div>';
+				  '</div>';
 			 	 } 
 			 	document.getElementById('expenses').innerHTML = output; //ADD OUTPUT TO expenses div 
 			 }
@@ -472,8 +706,10 @@
 		return clearFunction();
 
 
-	}
+	 }
 
 
-	
+ 		
 
+
+		
