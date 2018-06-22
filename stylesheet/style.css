@@ -173,7 +173,6 @@ label {
 }
 
 
-
 i {
 	font-family: peaxdrawnicons;
 	font-style: normal;
@@ -648,6 +647,208 @@ transform: scale(1.1);
 }
 
 
+/* EDIT CATEGORY ICONS */
+
+
+input#editFood[type=radio] + label
+{
+background-image: url("../images/food.png");
+background-position: center;
+background-repeat: no-repeat;
+background-size: 40px;
+height: 50px;
+width: 50px;
+display:inline-block;
+padding: 0 0 0 0px;
+margin-right:10px;
+transition: all .1s ease-in-out;
+cursor: pointer;
+opacity: .5;
+-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+input#editFood[type=radio]:checked + label
+{
+opacity: 1;
+}
+
+input#editFood[type=radio]:hover + label
+{
+transform: scale(1.1);
+}
+
+
+input#editTransportation[type=radio] + label
+{
+background-image: url("../images/transportation.png");
+background-position: center;
+background-repeat: no-repeat;
+background-size: 40px;
+height: 50px;
+width: 50px;
+display:inline-block;
+padding: 0 0 0 0px;
+margin-right:10px;
+transition: all .1s ease-in-out;
+cursor: pointer;
+opacity: .5;
+-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+
+input#editTransportation[type=radio]:checked + label
+{
+opacity: 1;
+}
+
+input#editTransportation[type=radio]:hover + label
+{
+transform: scale(1.1);
+}
+
+input#editUtilities[type=radio] + label
+{
+background-image: url("../images/utilities.png");
+background-position: center;
+background-repeat: no-repeat;
+background-size: 40px;
+height: 50px;
+width: 50px;
+display:inline-block;
+padding: 0 0 0 0px;
+margin-right:10px;
+transition: all .1s ease-in-out;
+cursor: pointer;
+opacity: .5;
+-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+input#editUtilities[type=radio]:checked + label
+{
+opacity: 1;
+}
+
+input#editUtilities[type=radio]:hover + label
+{
+transform: scale(1.1);
+}
+
+input#editHealth[type=radio] + label
+{
+background-image: url("../images/health.png");
+background-position: center;
+background-repeat: no-repeat;
+background-size: 40px;
+height: 50px;
+width: 50px;
+display:inline-block;
+padding: 0 0 0 0px;
+margin-right:10px;
+transition: all .1s ease-in-out;
+cursor: pointer;
+opacity: .5;
+-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+input#editHealth[type=radio]:checked + label
+{
+opacity: 1;
+}
+
+input#editHealth[type=radio]:hover + label
+{
+transform: scale(1.1);
+}
+
+input#editLiesures[type=radio] + label
+{
+background-image: url("../images/liesure.png");
+background-position: center;
+background-repeat: no-repeat;
+background-size: 40px;
+height: 50px;
+width: 50px;
+display:inline-block;
+padding: 0 0 0 0px;
+margin-right:10px;
+transition: all .1s ease-in-out;
+cursor: pointer;
+opacity: .5;
+-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+input#editLiesures[type=radio]:checked + label
+{
+opacity: 1;
+}
+
+input#editLiesures[type=radio]:hover + label
+{
+transform: scale(1.1);
+}
+
+input#editShopping[type=radio] + label
+{
+background-image: url("../images/shopping.png");
+background-position: center;
+background-repeat: no-repeat;
+background-size: 40px;
+height: 50px;
+width: 50px;
+display:inline-block;
+padding: 0 0 0 0px;
+transition: all .1s ease-in-out;
+cursor: pointer;
+opacity: .5;
+-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+
+input#editShopping[type=radio]:checked + label
+{
+opacity: 1;
+}
+
+input#editShopping[type=radio]:hover + label
+{
+transform: scale(1.1);
+}
 
 
 

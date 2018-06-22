@@ -129,7 +129,7 @@
 			 <!--SUMMARY OF  EXPENSES SECTION-->
 			 <div class="col-md-6 margin-top-respon">
 			 	<!--SUMMARY EXPENSES HEADING-->
-				 <div class="col">
+				 <div class="col" id="test">
 					 <h4 class="letters-for-learners"><i>m</i>Summary of Expenses</h4>
 				 </div>
 				 <!--SUMMARY EXPENSES HEADING END-->
@@ -159,10 +159,104 @@
 			 <!--SUMMARY OF  EXPENSES SECTION END-->
 
 		 </form>
-		 <!--FORM CONTENT END-->
+
+		  <!--EDIT MODAL-->
+		  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+			  <div class="modal-dialog modal-dialog-centered" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="editModalTitle">Modal title</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body" id="editModalBody">
+
+			      	<!--FORM CONTENT-->
+		<form class="row" id="postForm" name="myForm">
+
+			<!--RECORD EXPENSES SECTION-->
+			<div class="col-md-12 ">
+
+
+				 <!--AMOUNT INPUT SECTION-->
+				 <div class="col">
+					 <div class="form-group">
+						 <label>Amount</label>
+						 <div class="col text-center">	
+							 <!--GET THE AMOUNT INPUT-->
+			 				 <input id="editAmount" type="text" name="amount" value="" placeholder="Enter amount" required="">
+			 				 <!--CONTAINER FOR AMOUNT VALIDATE WARNING-->
+	 						 <p id='amountValidate' class="mt-2"></p>
+			 			 </div>
+		 			 </div>
+	 			 </div>
+	 			 <!--AMOUNT INPUT SECTION END-->
+
+	 			<!--CATEGORIES RADIO SECTION-->
+	 			<div class="col">
+				  	 <div class="form-group">	
+						 <label for="categories">Change Category</label>
+						 <div class="col text-center">
+							 <fieldset id="editCategories">
+								 <!--GET THE FOOD CHECKBOX-->
+					 			 <input  id='editFood' onclick="editFoodValue()"   type="radio" name='editCategories' /><label for="editFood" title="Food" required=""></label> 
+					 			 <!--GET THE TRANSPORTATION CHECKBOX-->
+					 			 <input id="editTransportation" onclick="editTransportationValue()"   value='' type="radio"  name='editCategories'  required=""><label for="editTransportation" title="Transportation"></label> 
+					 			 <!--GET THE UTILITIES CHECKBOX-->
+					 			 <input id="editUtilities" onclick="editUtilitiesValue()"  value='' type="radio"  name='editCategories' required=""><label for="editUtilities" title="Utilities"></label> 
+					 			 <!--GET THE HEALTH CHECKBOX-->
+					 			 <input id="editHealth" onclick="editHealthValues()"   value='' type="radio"  name='editCategories'  required=""><label for="editHealth" title="Health"></label> 
+					 			 <!--GET THE LIESURES CHECKBOX-->
+					 			 <input id="editLiesures" onclick="editLiesuresValue()"   value='' type="radio"  name='editCategories'  required=""><label for="editLiesures" title="Liesure"></label> 
+					 			 <!--GET THE SHOPPING CHECKBOX-->
+					 			 <input id="editShopping" onclick="editShoppingValue()"    value='' type="radio"  name='editCategories' id="shopping" required=""><label for="editShopping" title="Shopping"></label> 
+				 			 </fieldset>
+				 			 <!--CONTAINER FOR CATEGORY VALIDATE WARNING-->
+				 			 <p id='categoryValidate'></p>
+				 		 </div>
+				 	 </div>
+				  </div>
+				 <!--CATEGORIES RADIO SECTION END-->
+
+				 <!--DESCRIPTION TEXTAREA SECTION-->
+				 <div class="col">	
+				  	 <div class="form-group">
+		     			 <label for="description">Change Description</label>
+		     			 <div class="col text-center">
+		     				 <!--GET THE DESCRIPTION TEXTAREA-->
+		      				 <textarea id="editDescription" value="" rows="4" id="description" name="description" placeholder="Enter Description" required="" ></textarea>
+		      				 <!--CONTAINER FOR DESCRIPTION VALIDATE WARNING-->
+	 						 <p id='descriptionValidate' class="mt-2"></p>
+		      			 </div>
+	   				 </div>
+	   			 </div>
+	   			 <!--DESCRIPTION TEXTAREA SECTION END-->
+
+			 </div>
+			 <!--RECORD EXPENSES SECTION END-->
+
+			</form>
+
+
+
+
+
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			        <button type="button" class="btn btn-primary">Save changes</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			<!--END OF EDIT MODAL-->
 
 	 </main>
 	 <!--MAIN CONTENT END-->
+
+
+			
 
 	 <!--FOOTER SECTION-->
 	 <footer class="footer">
