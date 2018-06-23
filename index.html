@@ -29,7 +29,7 @@
 	<link href="web-fonts-with-css/css/fontawesome-all.min.css" rel="stylesheet">
 
 	<!--BOOTSTRAP JAVASCRIPT AND JQUERY-->
-	<script type="text/javascript" src="bootstrap-4.0.0/assets/js/vendor/jquery-slim.min.js"></script>
+	<!-- <script type="text/javascript" src="bootstrap-4.0.0/assets/js/vendor/jquery-slim.min.js"></script> -->
 	<script type="text/javascript" src="bootstrap-4.0.0/dist/js/bootstrap.min.js"></script> 
 
 
@@ -155,6 +155,12 @@
 				 </div>
 				 <!--TOTAL EXPENSES CONTAINER END-->
 
+				 	 <div class="col mt-5" >
+						<div id="success-alert" class="alert alert-success hide-alert">
+ 					 	 <strong>Expenses Added!</strong>
+						</div>
+				    </div>
+
 			 </div>
 			 <!--SUMMARY OF  EXPENSES SECTION END-->
 
@@ -172,26 +178,26 @@
 			      </div>
 			      <div class="modal-body" id="editModalBody">
 
-			      	<!--FORM CONTENT-->
-		<form class="row" id="postForm" name="myForm">
+			<!--FORM CONTENT-->
+			<form class="row" id="editExpenses" name="editForm">
 
-			<!--RECORD EXPENSES SECTION-->
-			<div class="col-md-12 ">
+				<!--RECORD EXPENSES SECTION-->
+				<div class="col-md-12 ">
 
 
-				 <!--AMOUNT INPUT SECTION-->
-				 <div class="col">
-					 <div class="form-group">
-						 <label>Amount</label>
-						 <div class="col text-center">	
-							 <!--GET THE AMOUNT INPUT-->
-			 				 <input id="editAmount" type="text" name="amount" value="" placeholder="Enter amount" required="">
-			 				 <!--CONTAINER FOR AMOUNT VALIDATE WARNING-->
-	 						 <p id='amountValidate' class="mt-2"></p>
+					 <!--AMOUNT INPUT SECTION-->
+					 <div class="col">
+						 <div class="form-group">
+							 <label>Amount</label>
+							 <div class="col text-center">	
+								 <!--GET THE AMOUNT INPUT-->
+				 				 <input id="editAmount" type="text" name="amount" value="" placeholder="Enter amount" required="">
+				 				 <!--CONTAINER FOR AMOUNT VALIDATE WARNING-->
+		 						 <p id='amountValidate' class="mt-2"></p>
+				 			 </div>
 			 			 </div>
 		 			 </div>
-	 			 </div>
-	 			 <!--AMOUNT INPUT SECTION END-->
+		 			 <!--AMOUNT INPUT SECTION END-->
 
 	 			<!--CATEGORIES RADIO SECTION-->
 	 			<div class="col">
@@ -237,9 +243,6 @@
 			 <!--RECORD EXPENSES SECTION END-->
 
 			</form>
-
-
-
 
 
 			      </div>

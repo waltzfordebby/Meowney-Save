@@ -1,7 +1,7 @@
 
 		 //EVENT LISTENER FOR FORM SUBMISSION
 		 document.getElementById('postForm').addEventListener('submit',loadBudget); /*GETS the form id. When the form is submitted loadBudget function is executed*/
-
+		 // document.getElementById('editExpenses').addEventListener('submit',);
 
 
 
@@ -539,7 +539,9 @@
 		         xhr.send(form_datas)
                  
                  //ALERT IF THE DATAS ARE SUCCESSFULLY ADDED TO DATABASE	
-		         alert('Expenses Added');
+		         // alert('Expenses Added');
+
+		         expensesAdded();
 
 		         //OUTPUT THE EXPENSES
 		         loadExpenses();
@@ -554,6 +556,15 @@
 	         }
 	     }
 
+
+	     function expensesAdded(){
+
+	     	var alert = document.getElementById('success-alert');
+	     	 $("#success-alert").fadeIn("slow","linear");
+	     	 $("#success-alert").fadeOut(2500,"linear");
+	     }
+
+		
 
 	     
 
