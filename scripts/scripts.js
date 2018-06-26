@@ -1,13 +1,15 @@
 
 		 //EVENT LISTENER FOR FORM SUBMISSION
 		 document.getElementById('postForm').addEventListener('submit',loadBudget); /*GETS the form id. When the form is submitted loadBudget function is executed*/
-		 // document.getElementById('editExpenses').addEventListener('submit',);
+		 document.getElementById('editExpenses').addEventListener('submit',editLoadBudget);
+
+		 var editIdNumber = 0;
+
 
 
 
 		 //CREATE ELEMENT BUTTON
 		 function createDelButton(id_number){
-
 		     var  delbutton = document.createElement('button'); //CREATE ELEMENT BUTTON
 			 delbutton.className = 'delete-button'; //SET CLASS
 			 delbutton.innerHTML = '<i class="far fas fa-eraser fa-sm">'; //SET THE INNER CONTENT
@@ -15,7 +17,7 @@
 			 delbutton.setAttribute('type','button'); //SET TYPE
 			 delbutton.setAttribute('onclick','delete_expenses('+id_number+')'); //SET ONCLICK ATTRIBUTE
 			 return delbutton.outerHTML;; //RETURN delbutton content	 
-			 }
+		 }
 
  
 
@@ -23,7 +25,6 @@
 		 function delete_expenses(id_number){
 
 			 var xhr = new XMLHttpRequest(); //SEND XMLHTTPREQUEST
-
 
 			 xhr.open('POST','php/delete-expenses.php',true); // OPEN delete-expenses.php
 
@@ -61,140 +62,7 @@
 
 		 }
 
-		 //EDIT EXPENSES FUNCTIOn
-		 function edit_expenses(id_number){
 
-			  console.log('Hello there '+id_number);
-
-			  query(id_number);
-			 
-		 }
-
-		 //EDIT QUERY FUNCTION
-		 function query(id_number){
-
-		 	//PARAMATER CONTAINING ALL THE FORM VALUES
-			 var idNumber = "idNumber="+id_number;
-
-			  //SET XMLHTTP REQUEST
-			 var xhr = new XMLHttpRequest();
-
-			 //OPEN QUERIES AND GET DATA
-			 xhr.open('POST','php/edit-expenses.php',true);
-
-			 //SET THE REQUEST HEADER
-		     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
-
-			 //ONLOAD FUNCTION
-			 xhr.onload = function(){
-
-			 	 //IF LOAD STATUS IS OK
-				 if(this.status == 200){
-				 	 
-
-				 	var expense = JSON.parse(this.responseText);
-
-				 	// MODAL VARIABLES
-				 	var modalTitle = document.getElementById('editModalTitle');
-				 	var modalBody = document.getElementById('editModalBody');
-
-				 	//INPUT VARIABLES
-				 	var editAmount = document.getElementById('editAmount');
-				 	var editDescriptiom = document.getElementById('editDescription');
-
-				 	
-				 	//CATEGORY VARIABLES
-				 	var editFood  = document.getElementById('editFood');
-					var editTransportation = document.getElementById('editTransportation');
-					var editUtilities = document.getElementById('editUtilities');
-					var editHealth = document.getElementById('editHealth');
-					var editLiesures = document.getElementById('editLiesures');
-					var editShopping = document.getElementById('editShopping');
-
-				 	for(var i in expense){
-
-				
-
-					 	var id = expense[i].id;
-					 	var amount = expense[i].amount;
-					 	var food = expense[i].food;
-					 	var transportation = expense[i].transportation;
-					 	var utilities = expense[i].utilities;
-					 	var health = expense[i].health;
-					 	var liesures = expense[i].liesures;
-					 	var shopping = expense[i].shopping;
-					 	var description = expense[i].description;
-					 	var date_created = expense[i].date_created;
-					 	var time_created = expense[i].time_created;
-
-					 	//QUERY DATA
-					 	console.log(id);
-					 	console.log(amount);
-					 	console.log(food);
-					 	console.log(transportation);
-					 	console.log(utilities);
-					 	console.log(health);
-					 	console.log(liesures);
-					 	console.log(shopping);
-					 	console.log(description);
-					 	console.log(date_created);
-					 	console.log(time_created)
-
-
-				 }
-
-				 	if(food == 1){
-				 		editFood.checked = true;
-				 	}else {
-				 		editFood.checked = false;
-				 	}
-
-
-				 	if(transportation == 1){
-				 		editTransportation.checked = true;
-				 	}else{
-				 		editTransportation.checked = false;
-				 	}
-
-				 	if(utilities == 1){
-				 		editUtilities.checked = true;
-				 	}else{
-				 		editUtilities.checked = false;
-				 	}
-
-				 	if(health == 1){
-
-				 		editHealth.checked = true;
-				 	}else{
-				 		editHealth.checked = false;
-				 	}
-
-				 	if(liesures == 1){
-				 		editLiesures.checked = true; 
-				 	}else{
-				 		editLiesures.checked = false;
-				 	}
-
-				 	if(shopping == 1){
-				 		editShopping.checked = true;
-				 	}else{
-				 		editShopping.checked = false;
-				 	}
-
-
-
-				 modalTitle.innerHTML = '<i>~</i>Edit ' +date_created;
-				 editAmount.value = amount;
-				 editDescription.value = description;
-
-
-				 	
-				 	}
-
-				}
-
-				xhr.send(idNumber); //SEND THE REQUEST
-		 }
 
 
 		 //EDIT CATEGORY FUNCTIONS
@@ -721,6 +589,300 @@
 
 
  		
+		//VALIDATE FORM INPUTS
+		 function validateEditDatas(){
+			 validateEditAmount(); //EXECUTE THE AMOUNT VALIDATION
+			 validateEditCategory(); //EXECUTE THE CATEGORY VALIDATION
+			 validateEditDescription(); //EXECUTE THE DESCRIPTION VALIDATION
 
+			 //IF ALL THE VALIDATION RETURNS TRUE THIS FUNCTION WILL RETURN TRUE
+			 if(validateEditAmount()==true && validateEditCategory() == true && validateEditDescription() ==true ){
+				 console.log('True');
+				 return true;
+			 }else{
+				 console.log('False');
+				 return false;
+			 }
+		 }
+
+		 //VALIDATE IF THE USER AMOUNT INPUT IS VALID
+		 function validateEditAmount(){
+			 var amount = document.getElementById('editAmount').value; //GET THE VALUE OF AMOUNT INPUT
+			 var regex =/^[0-9]+$/; //SET MATCH FOR NUMBER
+
+			 //IF AMOUNT IS NOT EQUAL TO NUMBER RETURN FALSE ELSE RETURN TRUE
+			 if(!amount.match(regex)){ //IF AMOUNT IS NOT VALID ADD THIS STATEMENT TO  AMOUNT VALIDATE CONTAINER AND RETURN FALSE
+				 document.getElementById("editAmountValidate").innerHTML ="Please add valid amount!";
+				 return false
+			 }else { //IF AMOUNT IS VALID ADD THIS STATEMENT TO  AMOUNT VALIDATE CONTAINER AND RETURN TRUE 
+				 document.getElementById("editAmountValidate").innerHTML = "";
+				 return true;
+			 }
+		 }
+
+		 //VALIDATE IF USER SELECTED CATEGORY
+		 function validateEditCategory(){
+			 var food = document.getElementById("editFood"); //GET THE VALUE OF FOOD CHECKBOX
+			 var transportation = document.getElementById("editTransportation"); //GET THE VALUE OF TRANSPORTATION CHECKBOX
+			 var utilities = document.getElementById("editUtilities"); //GET THE VALUE OF UTILITIES CHECKBOX
+			 var health = document.getElementById("editHealth"); //GET THE VALUE OF HEALTH CHECKBOX
+			 var liesures = document.getElementById("editLiesures"); //GET THE VALUE OF LIESURES CHECKBOX
+			 var shopping = document.getElementById("editShopping"); //GET THE VALUE OF SHOPPING CHECKBOX
+
+			 if(food.checked == true ){ //IF FOOD IS CHECKED RETURN TRUE ELSE RETURN FALSE
+				 document.getElementById("editCategoryValidate").innerHTML = "";
+				 return true;
+			 }else if(transportation.checked == true){ //IF TRANSPORTATION IS CHECKED RETURN TRUE ELSE RETURN FALSE
+				 document.getElementById("editCategoryValidate").innerHTML = "";
+				 return true;
+			 }else if(utilities.checked == true){ //IF UTILITIES IS CHECKED RETURN TRUE ELSE RETURN FALSE
+				 document.getElementById("editCategoryValidate").innerHTML = "";
+				 return true;
+			 }else if(health.checked == true){ //IF HEALTH IS CHECKED RETURN TRUE ELSE RETURN FALSE
+				 document.getElementById("editCategoryValidate").innerHTML = "";
+				 return true;
+			 }else if(liesures.checked == true){ //IF LIESURES IS CHECKED RETURN TRUE ELSE RETURN FALSE
+				 document.getElementById("editCategoryValidate").innerHTML = "";
+				 return true;
+			 }else if(shopping.checked == true){ //IF SHOPPING IS CHECKED RETURN TRUE ELSE RETURN FALSE
+				 document.getElementById("editCategoryValidate").innerHTML = "";
+				 return true;
+			 }else { //IF NO CHECKBOX IS CHECKED ADD STATEMENT TO CATEGORY VALIDATE CONTAINER AND RETURN FALSE
+				 document.getElementById("editCategoryValidate").innerHTML ="Please select category!";
+				 return false;
+			 }
+		 }
+
+		 //VALIDATE IF USER ADDED DESCRIPTION
+		 function validateEditDescription(){
+			 var description = document.getElementById('editDescription').value; //GET THE VALUE OF DESCRIPTION TEXTAREA
+
+			 if(description == ''){ //IF USER DID NOT ADD DESCRIPTION ADD THIS STATEMENT TO DESCRIPTION VALIDATE CONTAINER AND RETURN FALSE
+				 document.getElementById("editDescriptionValidate").innerHTML ="Please add description!";
+				 return false;
+			 }else { //IF USER ADDED DESCRIPTION ADD THIS STATEMENT TO DESCRIPTION VALIDATE CONTAINER AND RETURN TRUE
+				 document.getElementById("descriptionValidate").innerHTML = "";
+				 return true;
+			 }
+		 }
+
+
+
+
+		 
+        //EDIT EXPENSES FUNCTION
+		 function edit_expenses(id_number){
+			  console.log('Hello there '+id_number);
+			  query(id_number);
+			  editIdNumber = id_number;
+		 }
+
+		  //EDIT QUERY FUNCTION
+		 function query(id_number){
+		 	//PARAMATER CONTAINING ALL THE FORM VALUES
+			 var idNumber = "idNumber="+id_number;
+
+			  //SET XMLHTTP REQUEST
+			 var xhr = new XMLHttpRequest();
+
+			 //OPEN QUERIES AND GET DATA
+			 xhr.open('POST','php/fetch-expenses.php',true);
+
+			 //SET THE REQUEST HEADER
+		     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+
+			 //ONLOAD FUNCTION
+			 xhr.onload = function(){
+
+			 	 //IF LOAD STATUS IS OK
+				 if(this.status == 200){
+				 	 
+
+				 	var expense = JSON.parse(this.responseText);
+
+				 	// MODAL VARIABLES
+				 	var modalTitle = document.getElementById('editModalTitle');
+				 	var modalBody = document.getElementById('editModalBody');
+
+				 	//INPUT VARIABLES
+				 	var editAmount = document.getElementById('editAmount');
+				 	var editDescriptiom = document.getElementById('editDescription');
+
+				 	
+				 	//CATEGORY VARIABLES
+				 	var editFood  = document.getElementById('editFood');
+					var editTransportation = document.getElementById('editTransportation');
+					var editUtilities = document.getElementById('editUtilities');
+					var editHealth = document.getElementById('editHealth');
+					var editLiesures = document.getElementById('editLiesures');
+					var editShopping = document.getElementById('editShopping');
+
+				 	for(var i in expense){
+
+				
+
+					 	var id = expense[i].id;
+					 	var amount = expense[i].amount;
+					 	var food = expense[i].food;
+					 	var transportation = expense[i].transportation;
+					 	var utilities = expense[i].utilities;
+					 	var health = expense[i].health;
+					 	var liesures = expense[i].liesures;
+					 	var shopping = expense[i].shopping;
+					 	var description = expense[i].description;
+					 	var date_created = expense[i].date_created;
+					 	var time_created = expense[i].time_created;
+
+					 	//QUERY DATA
+					 	console.log(amount);
+					 	console.log(food);
+					 	console.log(transportation);
+					 	console.log(utilities);
+					 	console.log(health);
+					 	console.log(liesures);
+					 	console.log(shopping);
+					 	console.log(description);
+					 	console.log(date_created);
+					 	console.log(time_created)
+
+
+				 }
+
+				 	if(food == 1){
+				 		editFood.checked = true;
+				 	}else {
+				 		editFood.checked = false;
+				 	}
+
+
+				 	if(transportation == 1){
+				 		editTransportation.checked = true;
+				 	}else{
+				 		editTransportation.checked = false;
+				 	}
+
+				 	if(utilities == 1){
+				 		editUtilities.checked = true;
+				 	}else{
+				 		editUtilities.checked = false;
+				 	}
+
+				 	if(health == 1){
+
+				 		editHealth.checked = true;
+				 	}else{
+				 		editHealth.checked = false;
+				 	}
+
+				 	if(liesures == 1){
+				 		editLiesures.checked = true; 
+				 	}else{
+				 		editLiesures.checked = false;
+				 	}
+
+				 	if(shopping == 1){
+				 		editShopping.checked = true;
+				 	}else{
+				 		editShopping.checked = false;
+				 	}
+
+
+
+				 modalTitle.innerHTML = '<i>~</i>Edit ' +date_created;
+				 editAmount.value = amount;
+				 editDescription.value = description;
+
+				 	
+				 	}
+
+				}
+
+				xhr.send(idNumber); //SEND THE REQUEST
+				 
+		 }
+
+
+		 //PASS THE INPUTS DATA TO PROCESS.PHP USING AJAX
+	 	 function editLoadBudget(e){
+		 e.preventDefault();
+
+
+		 	 //IF ALL DATAS ENTERED ARE VALID EXECUTE THIS
+		     if(validateEditDatas() == true){
+
+		     	 //ALL FORM INPUT VALUES
+			     var amount = document.getElementById('editAmount').value; //GET THE VALUE OF AMOUNT INPUT
+			 	 var food = editFoodValue(); //GET THE VALUE OF FOOD CHECKBOX
+				 var transportation = editTransportationValue(); //GET THE VALUE OF TRANSPORTATION CHECKBOX
+				 var utilities = editUtilitiesValue(); //GET THE VALUE OF UTILITIES CHECKBOX
+				 var health = editHealthValues(); //GET THE VALUE OF HEALTH CHECKBOX
+				 var liesure = editLiesuresValue(); //GET THE VALUE OF LIESURES CHECKBOX
+				 var shopping = editShoppingValue(); //GET THE VALUE OF SHOPPING CHECKBOX
+				 var description = document.getElementById('editDescription').value; //GET THE VALUE OF DESCRIPTION TEXTAREA
+
+				 //ONE BY ONE OUTPUTS THE FORM VALUES
+				 console.log(amount);
+				 console.log(food);
+				 console.log(transportation);
+				 console.log(utilities);
+				 console.log(health);
+				 console.log(liesure);
+				 console.log(shopping);
+				 console.log(description);
+
+
+
+				 //PARAMATER CONTAINING ALL THE FORM VALUES
+				 var form_datas = '&id='+editIdNumber+'&amount='+amount + '&food='+food + '&transportation='+transportation +'&utilities='+utilities + 
+				 '&health='+health + '&liesures='+liesure + '&shopping='+shopping + '&description='+description ;
+
+				 //OUTPUTS THE FORM DATAS SUMMARY
+				 console.log(form_datas);
+				
+				 //CREATE XMLHTTPREQUEST
+				 var xhr = new XMLHttpRequest();
+
+				 //OPENS THE PROCESS.PHP
+				 xhr.open('POST','php/edit-expenses.php',true);
+
+				 //SET THE REQUEST HEADER
+		         xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+
+  				 //ONLOAD RUN THE FUNCTION IF THE STATUS IS OK GET THE RESPONSE TEXT
+		         xhr.onload = function () {
+			             if(this.status == 200){
+
+				             console.log(this.responseText); //OUTPUT THE OUTPUT OF  PROCESS.PHP
+			      			//OUTPUT THE EXPENSES
+		                    loadExpenses();
+			             }
+		             }
+
+		         //SEND THE PARAMETER TO PROCESS.PHP
+		         xhr.send(form_datas)
+                 
+                 //ALERT IF THE DATAS ARE SUCCESSFULLY ADDED TO DATABASE	
+		         // alert('Expenses Added');
+
+		         expensesAdded();
+
+		         
+
+
+	         }else{//IF ONE DATA OR ALL DATAS ENTERED ARE NOT VALID EXECUTE THIS{
+
+		         console.log('Data is still on hold!');
+	         }
+	     }
+
+	   
+
+		$('#editExpenses').submit(function() {
+	   		$('#editModal').modal('hide');
+		});
 
 		
+		
+
+
+	 

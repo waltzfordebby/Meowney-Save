@@ -193,7 +193,7 @@
 								 <!--GET THE AMOUNT INPUT-->
 				 				 <input id="editAmount" type="text" name="amount" value="" placeholder="Enter amount" required="">
 				 				 <!--CONTAINER FOR AMOUNT VALIDATE WARNING-->
-		 						 <p id='amountValidate' class="mt-2"></p>
+		 						 <p id='editAmountValidate' class="mt-2"></p>
 				 			 </div>
 			 			 </div>
 		 			 </div>
@@ -219,7 +219,7 @@
 					 			 <input id="editShopping" onclick="editShoppingValue()"    value='' type="radio"  name='editCategories' id="shopping" required=""><label for="editShopping" title="Shopping"></label> 
 				 			 </fieldset>
 				 			 <!--CONTAINER FOR CATEGORY VALIDATE WARNING-->
-				 			 <p id='categoryValidate'></p>
+				 			 <p id='editCategoryValidate'></p>
 				 		 </div>
 				 	 </div>
 				  </div>
@@ -233,7 +233,7 @@
 		     				 <!--GET THE DESCRIPTION TEXTAREA-->
 		      				 <textarea id="editDescription" value="" rows="4" id="description" name="description" placeholder="Enter Description" required="" ></textarea>
 		      				 <!--CONTAINER FOR DESCRIPTION VALIDATE WARNING-->
-	 						 <p id='descriptionValidate' class="mt-2"></p>
+	 						 <p id='editDescriptionValidate' class="mt-2"></p>
 		      			 </div>
 	   				 </div>
 	   			 </div>
@@ -242,19 +242,19 @@
 			 </div>
 			 <!--RECORD EXPENSES SECTION END-->
 
-			</form>
+
 
 
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			        <button type="button" class="btn btn-primary">Save changes</button>
+			        <button id="editExpenses" type="submit" class="btn btn-primary">Save changes</button>
 			      </div>
 			    </div>
 			  </div>
 			</div>
+			</form>
 			<!--END OF EDIT MODAL-->
-
 	 </main>
 	 <!--MAIN CONTENT END-->
 
