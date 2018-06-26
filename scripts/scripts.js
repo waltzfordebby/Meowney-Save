@@ -400,6 +400,7 @@
 			             if(this.status == 200){
 
 				             console.log(this.responseText); //OUTPUT THE OUTPUT OF  PROCESS.PHP
+				              loadExpenses();
 			             }
 		             }
 
@@ -410,9 +411,6 @@
 		         // alert('Expenses Added');
 
 		         expensesAdded();
-
-		         //OUTPUT THE EXPENSES
-		         loadExpenses();
 
 		         //CLEAR THE FORM INPUTS 
 		         return clearFunction();
