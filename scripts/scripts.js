@@ -41,9 +41,17 @@
 					 loadExpenses(); //AFTER DELETETING UPDATE THE EXPENSES LIST
 				}
 			 }
+			 expensesdelete()
 
 			 xhr.send(id_number); //SEND THE REQUEST WITH THE id_number parameter
 		 }
+
+		   function expensesdelete(){
+
+	     	var alert = document.getElementById('delete-alert');
+	     	 $("#delete-alert").fadeIn("slow","linear");
+	     	 $("#delete-alert").fadeOut(3000,"linear");
+	     }
 
 
 		 //CREATE EDIT BUTTON
@@ -427,7 +435,7 @@
 
 	     	var alert = document.getElementById('success-alert');
 	     	 $("#success-alert").fadeIn("slow","linear");
-	     	 $("#success-alert").fadeOut(2500,"linear");
+	     	 $("#success-alert").fadeOut(3000,"linear");
 	     }
 
 		
@@ -862,7 +870,7 @@
                  //ALERT IF THE DATAS ARE SUCCESSFULLY ADDED TO DATABASE	
 		         // alert('Expenses Added');
 
-		         expensesAdded();
+		         expensesEdited();
 
 		         
 
@@ -873,7 +881,13 @@
 	         }
 	     }
 
-	   
+	    function expensesEdited(){
+
+	     	var alert = document.getElementById('edit-alert');
+	     	 $("#edit-alert").fadeIn("slow","linear");
+	     	 $("#edit-alert").fadeOut(3000,"linear");
+	     }
+
 
 		$('#editExpenses').submit(function() {
 	   		$('#editModal').modal('hide');
