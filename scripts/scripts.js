@@ -5,8 +5,7 @@
 
 		 var editIdNumber = 0;
 
-
-
+		
 
 		 //CREATE ELEMENT BUTTON
 		 function createDelButton(id_number){
@@ -16,8 +15,11 @@
 			 delbutton.setAttribute('id','delete_button'); // SET ID
 			 delbutton.setAttribute('type','button'); //SET TYPE
 			 delbutton.setAttribute('onclick','delete_expenses('+id_number+')'); //SET ONCLICK ATTRIBUTE
-			 return delbutton.outerHTML;; //RETURN delbutton content	 
+			 return delbutton.outerHTML;//RETURN delbutton content	 
 		 }
+
+
+
 
  
 
@@ -36,9 +38,9 @@
 			 xhr.onload = function(){ //ON XMLHTTPREQUEST LOAD
 
 				if(this.status == 200){ //IF STATUS IS OK
-
 					 console.log(this.responseText); //GET THE OUTPUT OF delete.expenses.php
 					 loadExpenses(); //AFTER DELETETING UPDATE THE EXPENSES LIST
+					 getPage();
 				}
 			 }
 			 expensesdelete()
@@ -409,6 +411,7 @@
 
 				             console.log(this.responseText); //OUTPUT THE OUTPUT OF  PROCESS.PHP
 				              loadExpenses();
+				               getPage();
 			             }
 		             }
 
@@ -440,27 +443,197 @@
 
 		
 
-	     
+	      function prevPage(){
+	      	var prevStatus = 1;
+		 	var prev = document.createElement('li');
+		 	prev.className = 'page-item';
+		 	prev.setAttribute('onclick',`getPrevious(${prevStatus})`);
+		 	prev.innerHTML = '<span class="page-link">Previous</span>';
+		 	return prev.outerHTML;
+		 }
 
-	 //FUNCTION THAT LOAD AND OUT ALL EXPENSES DATA
-	function loadExpenses(){
+		  function nextPage(){
+		  	var nextStatus = 2;
+		 	var next = document.createElement('li');
+		 	next.className = 'page-item';
+		 	next.setAttribute('onclick',`getNext(${nextStatus})`);
+		 	next.innerHTML = '<span class="page-link">Next</span>';
+		 	return next.outerHTML;
+		 }
+
+		function getactivePage(page_number){
+		 	var actPage = document.createElement('li')
+		 	actPage.className = 'page-item active';
+		 	actPage.setAttribute('onclick',`getPageNumber(${page_number})`);
+		 	actPage.innerHTML = `<span class="page-link">${page_number}</span>`;
+		 	return actPage.outerHTML;
+		 }
+
+		 function getnormalPage(page_number){
+		 	var normPage = document.createElement('li')
+		 	normPage.className = 'page-item';
+		 	normPage.setAttribute('onclick',`getPageNumber(${page_number})`);
+		 	normPage.innerHTML = `<span class="page-link">${page_number}</span>`;
+		 	return normPage.outerHTML;
+		 }
+
+		 function getPrevious(page_number){ 
+
+		 		if(page_number == 1){
+		 			page_number = 'prev';
+		 		}		
+		 		getPage(page_number);
+		 		loadExpenses(page_number);
+		 }
+
+		  function getNext(page_number){ 
+				
+		  		if(page_number == 2){
+		 			page_number = 'next';
+		 		}	
+
+		 		getPage(page_number);
+		 		loadExpenses(page_number);
+		 }
+
+
+
+		 function getPageNumber(page_number){ 		
+		 		getPage(page_number);
+		 		loadExpenses((page_number - 1)*5);
+		 }
+
+		 var expensesLength;
+
+		 function getPage(page_number = 1){
 
 		 //SET XMLHTTP REQUEST
 		 var xhr = new XMLHttpRequest();
 		 //OPEN QUERIES AND GET DATA
-		 xhr.open('GET','php/queries.php',true);
+		 xhr.open('GET','php/count-page.php',true);
 
 		 //ONLOAD FUNCTION
 		 xhr.onload = function(){
 
+		 	//IF LOAD STATUS IS OK
+			 if(this.status == 200){
+			 	var expenses = JSON.parse(this.responseText);
+			 	//SET THE OUPUT TO STRING
+			 	 var output2 = '';
+
+			 	 var previous = prevPage();
+			 	 var next = nextPage();
+
+			 	 var limit = 5;
+			 	 var expensesCount = expenses.length;
+			 	 expensesLength = expensesCount;
+			 	 var pageNumber = Math.ceil(expensesCount / limit);
+
+
+			 	 if(page_number == 'prev'){
+			 	 	if(activePage == 1){
+			 	 		activePage = 1;
+			 	 	}else {
+			 	 		activePage--;
+			 	 	}
+			 	 }else if(page_number == 'next'){
+			 	 	if(activePage == pageNumber){
+			 	 		activePage = pageNumber; 		
+			 	 	}else{
+			 	 	activePage++;
+			 	 	}
+
+			 	 }
+			 	 else{
+			 	 	activePage = page_number;
+			 	 }
+
+			
+
+			 	 console.log(activePage);
+
+			 	 for(var j = 1; j<=pageNumber; j++){
+			 	 	if(activePage == j){
+				 	 	 output2+=getactivePage(j);
+				 	 	 getActivePage2(j);
+				 	 	 getActivePage3(j);
+				 	 	}else{
+				 	 	output2+=getnormalPage(j);
+			 	 	} 	
+			 	 }
+
+			 	 document.getElementById('pagination1').innerHTML = previous+ output2 + next;
+
+			 }
+
+		 }
+		 xhr.send(); //SEND THE REQUEST
+		}
+
+		getPage();
+
+		var ActivePage;
+		var ActivePage2;
+
+		function getActivePage2(activePage){
+			console.log('ACTIVEPAGE! = '+activePage);
+			ActivePage = activePage;
+		}
+
+		function getActivePage3(activePage){
+			console.log('ACTIVEPAGE3! = '+activePage);
+			ActivePage2 = activePage;
+		}
+
+	 //FUNCTION THAT LOAD AND OUT ALL EXPENSES DATA
+	function loadExpenses(activePage = 0){
+
+			if(activePage == 'next'){
+				activePage = (ActivePage-1)*5;
+				console.log(activePage);
+				console.log(expensesLength);
+				if(activePage > expensesLength){
+					activePage = activePage-5;
+				}
+			}else if(activePage == 'prev'){
+				activePage = (ActivePage2-1)*5;
+				activePage-=5;
+				console.log(activePage);
+				if(activePage <=ActivePage2){
+					activePage=0;
+				}
+			}
+
+
+		 var setActivePage = "setPage="+activePage;
+
+		 //SET XMLHTTP REQUEST
+		 var xhr = new XMLHttpRequest();
+
+
+
+		 //OPEN QUERIES AND GET DATA
+		 xhr.open('POST','php/queries.php',true);
+
+		 console.log(setActivePage);
+
+		 //SET THE REQUEST HEADER
+		 xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+
+		 //ONLOAD FUNCTION
+		 xhr.onload = function(){
+		 	
+		 		 
 		 	 //IF LOAD STATUS IS OK
 			 if(this.status == 200){
 
 			 	 //GET THE DATA IN JSON FORMAT
 			 	 var expenses = JSON.parse(this.responseText);
 
+
 			 	 //SET THE OUPUT TO STRING
 			 	 var output = '';
+				
 
 			 	 //LOOP TO EXPENSES
 			 	 for (var i  in expenses){
@@ -477,7 +650,6 @@
 			 		 var time_created = expenses[i].time_created; // GET THE CREATION TIME
 
 
-			 		 
 
  					 //FOOD RESULT FUNCTION
 			 		 function foodResult(){
@@ -577,15 +749,27 @@
 			 	         '</div>'+
 				     '</div>'+
 				  '</div>';
+
+
+
+
+
+
 			 	 } 
 			 	document.getElementById('expenses').innerHTML = output; //ADD OUTPUT TO expenses div 
+
+
+
 			 }
 		}
 
-		xhr.send(); //SEND THE REQUEST
+		xhr.send(setActivePage); //SEND THE REQUEST
 		 
 		 //RETURN THE TOTAL AMOUNT
-		  loadTotal();
+		 loadTotal();
+
+		 
+	
 
 		//CLEAR THE FORM INPUTS 
 		return clearFunction();
@@ -594,6 +778,7 @@
 	 }
 
 
+	 
  		
 		//VALIDATE FORM INPUTS
 		 function validateEditDatas(){

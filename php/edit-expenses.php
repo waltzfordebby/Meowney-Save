@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 //DSN Variables
 $host = 'localhost'; //HOST NAME
