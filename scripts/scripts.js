@@ -589,21 +589,20 @@
 	function loadExpenses(activePage = 0){
 
 			if(activePage == 'next'){
-				activePage = (ActivePage-1)*5;
+				activePage = (ActivePage)*5;
 				console.log(activePage);
 				console.log(expensesLength);
-				if(activePage > expensesLength){
-					activePage = activePage-5;
+				if(activePage >= expensesLength){
+					activePage-=5;
 				}
 			}else if(activePage == 'prev'){
 				activePage = (ActivePage2-1)*5;
 				activePage-=5;
 				console.log(activePage);
-				if(activePage <=ActivePage2){
+				if(activePage <= ActivePage2){
 					activePage=0;
 				}
 			}
-
 
 		 var setActivePage = "setPage="+activePage;
 
