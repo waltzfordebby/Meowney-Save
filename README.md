@@ -1,5 +1,5 @@
-Meowney-Save is a web app that records my daily expenses and my expenses total.
-Built using HTML, CSS, Javascript, and Bootstrap for the Front-End. PHP, MySQL, and AJAX for the Back-End.
+<b>Meowney-Save is a web app that records my daily expenses and my expenses total.
+Built using HTML, CSS, Javascript, and Bootstrap for the Front-End. PHP, MySQL, and AJAX for the Back-End.</b>
 <br>
 <br>
 <b>Adding Expense</b><br>
